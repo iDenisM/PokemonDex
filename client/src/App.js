@@ -1,6 +1,8 @@
 import './App.css';
 import { useQuery, gql } from '@apollo/client';
 import Header from './components/Header';
+import Search from './components/Search';
+import Pokedex from './components/Pokedex';
 
 const ALL_POKEMONS = gql`
   {
@@ -23,6 +25,8 @@ function App() {
     <>
       <Header/>
       <main>
+        <Search />
+        <Pokedex />
         {
           data.pokemons.map(p => (
             <div key={p.id}>
