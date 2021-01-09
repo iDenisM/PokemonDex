@@ -1,6 +1,6 @@
 import './App.css';
-import Button from './components/Button';
 import { useQuery, gql } from '@apollo/client';
+import Header from './components/Header';
 
 const ALL_POKEMONS = gql`
   {
@@ -19,12 +19,9 @@ function App() {
   if (loading) return <p>Loading...</p>
   if (error) return <h2>Whoops... somthing went wrong!</h2>
 
-  console.log(data);
-
   return (
     <>
-      <Button>Hello</Button>
-      <header></header>
+      <Header/>
       <main>
         {
           data.pokemons.map(p => (
