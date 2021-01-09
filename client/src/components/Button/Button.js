@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
-const Button = ({ children, addClass, ...rest }) => {
+const Button = ({ children, addClass, ...porps }) => {
   const classNames = ['btn', ...addClass]
   return (
-    <button className={classNames.join(' ')} {...rest}>
+    <button className={classNames.join(' ')} {...porps}>
       { children }
     </button>
   )
@@ -13,11 +13,13 @@ const Button = ({ children, addClass, ...rest }) => {
 
 Button.propTypes = {
   children: PropTypes.any,
-  addClass: PropTypes.array
+  addClass: PropTypes.array,
+  onClick: PropTypes.func
 }
 
 Button.defaultProps = {
-  addClass: []
+  addClass: [],
+  onClick: undefined
 };
 
 export default Button;
