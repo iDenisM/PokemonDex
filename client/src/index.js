@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { 
+  ApolloClient, 
+  InMemoryCache,
+  HttpLink,
+  ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: 'https://graphql-pokemon2.vercel.app/'
+  }),
+  cache: new InMemoryCache()
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ApolloProvider>,
   document.getElementById('root')
 );
 
