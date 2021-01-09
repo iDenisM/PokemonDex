@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
-const Button = ({ children, image, ...rest }) => {
+const Button = ({ children, ...rest }) => {
   return (
     <button className="btn" {...rest}>
       { children }
@@ -11,7 +11,10 @@ const Button = ({ children, image, ...rest }) => {
 }
 
 Button.propTypes = {
-  label: PropTypes.any
+  children: PropTypes.any
 }
+
+// Button.defaultProps = {
+// };
 
 export default Button;
