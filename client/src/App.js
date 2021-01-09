@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-imp
+import Button from './components/Button'
 
 function App() {
   return (
     <>
       <div className="temp">Hello Pokemon Player</div>
+      <Button>Hello</Button>
     </>
   );
 }
