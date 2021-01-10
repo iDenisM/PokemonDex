@@ -16,15 +16,17 @@ const PokemonLayer = () => {
     setIsOpened(!isOpened)
   }
 
-  if (!pokemonData) return null;
-  if (!isOpened) toggleModal()
-  const { id, name, image } = pokemonData;
+  if (pokemonData && !isOpened) toggleModal()
 
   console.log(isOpened);
 
   return (
     <Modal addClass={['modal__pokemon']} show={isOpened} onClose={toggleModal}>
-      <Pokemon id={id} name={name} image={image} />
+      {
+        pokemonData && (
+          <Pokemon id={pokemonData.id} name={pokemonData.name} image={pokemonData.image} />
+        )
+      }
     </Modal>
   )
 }

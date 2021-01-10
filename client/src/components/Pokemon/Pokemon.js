@@ -66,7 +66,7 @@ const Pokemon = ({ id, name, image }) => {
 const template = ({ pokemon }, mode) => (
   <div>
     <div className="pk__img">
-      <Image src={pokemon.image} alt={pokemon.name} width="200" height="200" />
+      <Image src={pokemon.image} alt={pokemon.name} width={200} height={200} />
     </div>
     <div className="pk__name">{pokemon.name}</div>
     <div className={['pk__weight', mode].join(' ')}>
