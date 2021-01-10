@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Search from './components/Search';
 import Pokedex from './components/Pokedex';
 import PokemonModal from './components/PokemonModal';
+import CardsDeck from './components/CardsDeck';
 
 const App = () => {
   
@@ -11,9 +12,10 @@ const App = () => {
     <>
       <Header/>
       <main>
-        <PokemonModal />
         <Search />
         <Pokedex />
+        <PokemonModal />
+        <CardsDeck />
       </main>
     </>
   );
