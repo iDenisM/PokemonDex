@@ -4,6 +4,8 @@ import Image from '../Image';
 import Button from '../Button';
 import RadioInput from '../RadioInput';
 import { useQuery, gql } from '@apollo/client';
+import { useDispatch } from 'react-redux';
+import { selectPokemonClick } from '../../actions'
 import './Pokemon.css';
 
 const GET_POKEMON = (id, name) => {
@@ -62,6 +64,7 @@ const Pokemon = (pokemonBase) => {
   const mode = loading ? 'loading' : '';
   const fastGrpId = 'fast-grp';
   const specialGrpId = 'special-grp';
+  const dispatchClick = useDispatch();
   let pokemonData = { id, name, image };
 
   if (data) pokemonData = { ...data.pokemon };
@@ -74,6 +77,8 @@ const Pokemon = (pokemonBase) => {
   const selectPokemon = () => {
     if (fastAttack && specialAttack) {
       // SET REDUCER WITH POKEMON DATA
+      
+      dispatchClick(selectPokemonClick(null));
       return true;
     }
     setWarningSlection(true);

@@ -17,6 +17,7 @@ const PokemonLayer = () => {
   }
 
   if (pokemonData && !isOpened) toggleModal()
+  if (!pokemonData && isOpened) toggleModal()
 
   return (
     <Modal addClass={['modal__pokemon']} show={isOpened} onClose={toggleModal}>
