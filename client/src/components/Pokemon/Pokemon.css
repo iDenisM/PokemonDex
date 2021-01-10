@@ -1,3 +1,53 @@
+.pk {
+  padding: 10px;
+  width: 100%;
+}
+
+.pk__name {
+  margin: 10px 0;
+}
+
+.pk__desc {
+  margin-bottom: 80px;
+}
+
+.pk__attack__type {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding-top: 10px;
+}
+
+.pk__attack__name {
+  grid-column: 1 /span 3;
+  text-align: center;
+}
+
+.pk__attack__variant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e0e0e0;
+  word-break: break-all;
+  min-height: 70px;
+}
+
+.pk__footer {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  z-index: 1;
+}
+
+.pk__select {
+  width: inherit;
+  height: 100%;
+}
+
 .loading {
   background-color: #e6e6e6;
   color: #e6e6e6;

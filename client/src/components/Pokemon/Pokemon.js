@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from '../Image';
+import Button from '../Button';
 import { useQuery, gql } from '@apollo/client';
 import './Pokemon.css';
 
@@ -63,22 +64,86 @@ const Pokemon = ({ id, name, image }) => {
   return template(data, mode);
 }
 
-const template = ({ pokemon }, mode) => (
-  <div>
-    <div className="pk__img">
-      <Image src={pokemon.image} alt={pokemon.name} width={200} height={200} />
-    </div>
-    <div className="pk__name">{pokemon.name}</div>
-    <div className={['pk__weight', mode].join(' ')}>
-      <div className={['pk__weight--min', mode].join(' ')}>{pokemon.weight?.minimum}</div>
-      <div className={['pk__weight--max', mode].join(' ')}>{pokemon.weight?.maximum}</div>
-    </div>
-    <div className={['pk__height', mode].join(' ')}>
-      <div className={['pk__height--min', mode].join(' ')}>{pokemon.height?.minimum}</div>
-      <div className={['pk__height--max', mode].join(' ')}>{pokemon.height?.maximum}</div>
-    </div>    
-  </div>
-)
+const template = ({ pokemon }, mode) => {
+  const { 
+    name, image, weight, classification,
+    types, height, attacks } = pokemon;
+
+  return (
+    <article className="pk">
+      <header className="pk__name">{name}</header>
+      <div className="pk__img">
+        <Image src={image} alt={name} width={200} height={200} />
+      </div>
+      <main className="pk__desc">
+        <div className="pk__desc__header">Characteristics</div>
+        <div className="pk__content pk__class">{classification}</div>
+        <div className="pk__content pk__types">
+          <div className="pk__types__header">Types</div>
+          {
+            types?.map((type, i) => (
+              <div key={i}>{type}</div>
+            ))
+          }
+        </div>
+        <div className={['pk__content', 'pk__weight', mode].join(' ')}>
+          <div className='pk__content__header'>Weight:</div>
+          <div className={['pk__weight--min', mode].join(' ')}>
+            <span className="name">Min</span>
+            <span className="value">{weight?.minimum}</span>
+          </div>
+          <div className={['pk__weight--max', mode].join(' ')}>
+            <span className="name">Max</span>
+            <span className="value">{weight?.maximum}</span>
+          </div>
+        </div>
+        <div className={['pk__content', 'pk__height', mode].join(' ')}>
+          <div className="pk__content__header">Height:</div>
+          <div className={['pk__height--min', mode].join(' ')}>
+            <span className="name">Min</span>
+            <span className="value">{height?.minimum}</span>
+          </div>
+          <div className={['pk__height--max', mode].join(' ')}>
+            <span className="name">Max</span>
+            <span className="value">{height?.maximum}</span>
+          </div>
+        </div>    
+        <div className="pk__attack">
+          <div className="pk__attack__header">Attacks:</div>
+          <div className="pk__attack__type">
+            <div className="pk__attack__name">Fast</div>
+            {
+              attacks?.fast?.map((a, i) => attackType(a, i))
+            }
+          </div>
+          <div className="pk__attack__type">
+            <div className="pk__attack__name">Special</div>
+            {
+              attacks?.special?.map((a, i) => attackType(a, i))
+            }
+          </div>
+        </div>
+      </main>
+      <footer className="pk__footer">
+        <Button addClass={['pk__select']}>
+          <span className="text">Pick this pokemon</span>
+        </Button>
+      </footer>
+    </article>
+  )
+};
+
+const attackType = (attack, key) => {
+  const { name, type, damage } = attack;
+  return (
+    <Button key={key} addClass={['pk__attack__variant']}>
+      <span className="name">{name}</span>
+      <span className="type">{type}</span>
+      <span className="damage">{damage} dmg</span>
+    </Button>
+  )
+}
+
 
 Pokemon.propTypes = {
   id: PropTypes.string.isRequired,

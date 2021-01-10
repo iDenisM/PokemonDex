@@ -16,9 +16,9 @@ const Modal = ({ show, children, addClass, onClose, ...porps }) => {
   return (
     <div className={[...classList, ...addClass].join(' ')} {...porps}>
       <div className="modal__content" >
-        <Button onClick={onClose}>
+        <Button addClass={['modal__btn']} onClick={onClose}>
           <span className="ico"></span>
-          <span className="text">Close</span>
+          <span className="text is-vHidden">Close</span>
         </Button>
         { children }
       </div>
