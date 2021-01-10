@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducers from './reducers';
 import { 
   ApolloClient, 
   InMemoryCache,
@@ -16,10 +19,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+let store = createStore(rootReducers);
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <React.StrictMode>
-      <App />
+    <React.StrictMode> {/* Remove react strict mode at the end of the project */}
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>
   </ApolloProvider>,
   document.getElementById('root')
