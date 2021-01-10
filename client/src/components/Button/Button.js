@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import './Button.css';
 
 const Button = ({ children, addClass, ...porps }) => {
-  const classNames = ['btn', ...addClass]
   return (
-    <button className={classNames.join(' ')} {...porps}>
+    <button className={['btn', ...addClass].join(' ')} {...porps}>
       { children }
     </button>
   )

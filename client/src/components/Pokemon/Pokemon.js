@@ -55,19 +55,14 @@ const GET_POKEMON = (id, name) => {
 const Pokemon = ({ id, name, image }) => {
   const { loading, error, data } = useQuery(GET_POKEMON(id, name));
   const mode = loading ? 'loading' : '';
+  let pokemonData = { id, name, image };
 
-  if (loading) return template({pokemon: {
-    id, name, image
-  }}, mode);
+  if (data) pokemonData = { ...data.pokemon };
   if (error) return <h2>Whoops... somthing went wrong!</h2>
 
-  return template(data, mode);
-}
-
-const template = ({ pokemon }, mode) => {
   const { 
-    name, image, weight, classification,
-    types, height, attacks } = pokemon;
+    weight, classification,
+    types, height, attacks } = pokemonData;
 
   return (
     <article className="pk">
@@ -131,13 +126,21 @@ const template = ({ pokemon }, mode) => {
         </form>
       </main>
       <footer className="pk__footer">
-        <Button addClass={['pk__select']}>
+        <Button addClass={['pk__select']} onClick={selectPokemon}>
           <span className="text">Pick this pokemon</span>
         </Button>
       </footer>
     </article>
   )
+}
+
+const template = ({ pokemon }, mode) => {
+  
 };
+
+const selectPokemon = () => {
+
+}
 
 const attackType = (attack, key, group) => {
   const { name, type, damage } = attack;
