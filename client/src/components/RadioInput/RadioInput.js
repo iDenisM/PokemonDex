@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RadioInput = ({ id, value, group, children, addClass, ...props}) => {
+const RadioInput = ({ id, value, group, children, addClass, onChange, onBlur, ...props}) => {
   return (
     <div className={[...addClass].join(' ')} {...props}>
       <input 
@@ -10,6 +10,8 @@ const RadioInput = ({ id, value, group, children, addClass, ...props}) => {
         type="radio" 
         value={value} 
         name={group} 
+        onChange={onChange}
+        onBlur={onBlur}
       />
       <label htmlFor={id}>
         { children }
@@ -23,7 +25,9 @@ RadioInput.propTypes = {
   value: PropTypes.string,
   group: PropTypes.string,
   children: PropTypes.node,
-  addClass: PropTypes.array
+  addClass: PropTypes.array,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func
 }
 
 RadioInput.defaultProps = {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Pokemon from '../Pokemon';
 import Modal from '../Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectClick } from '../../actions'
+import { selectPokemonClick } from '../../actions'
 import './PokemonModal.css';
 
 const PokemonLayer = () => {
@@ -12,7 +12,7 @@ const PokemonLayer = () => {
   const dispatchClick = useDispatch();
 
   const toggleModal = () => {
-    if (isOpened) dispatchClick(selectClick(null));
+    if (isOpened) dispatchClick(selectPokemonClick(null));
     setIsOpened(!isOpened)
   }
 
@@ -22,7 +22,9 @@ const PokemonLayer = () => {
     <Modal addClass={['modal__pokemon']} show={isOpened} onClose={toggleModal}>
       {
         pokemonData && (
-          <Pokemon id={pokemonData.id} name={pokemonData.name} image={pokemonData.image} />
+          <Pokemon 
+            pokemonBase={pokemonData} 
+          />
         )
       }
     </Modal>

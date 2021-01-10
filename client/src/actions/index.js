@@ -3,7 +3,7 @@ export const searchKeyDown = (value) => ({
   payload: value
 })
 
-export const selectClick = (value) => ({
+export const selectPokemonClick = (value) => ({
   type: 'SELECTING',
   payload: value
 })

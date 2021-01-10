@@ -3,12 +3,13 @@ import Button from '../Button';
 import Image from '../Image';
 import { useQuery, gql } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectClick } from '../../actions'
+import { selectPokemonClick } from '../../actions'
 import './Pokedex.css';
 
-const ALL_POKEMONS = gql`
+const ALL_POKEMONS = (number) => {
+  return gql`
   {
-    pokemons(first: 10){
+    pokemons(first: ${number}){
       id
       name
       types
@@ -16,9 +17,10 @@ const ALL_POKEMONS = gql`
     }
   }
 `;
+}
 
 const Pokedex = () => {
-  const { loading, error, data } = useQuery(ALL_POKEMONS);
+  const { loading, error, data } = useQuery(ALL_POKEMONS(20));
   const dispatchClick = useDispatch();
   const selectSearchProduct = (state) => state.textSearch;
   const textSearch = useSelector(selectSearchProduct);
@@ -44,7 +46,7 @@ const Pokedex = () => {
                 name: p.name,
                 image: p.image
               }
-              dispatchClick(selectClick(value));
+              dispatchClick(selectPokemonClick(value));
             }}>
               <Image 
                 addClass={['pokemon__img']} 

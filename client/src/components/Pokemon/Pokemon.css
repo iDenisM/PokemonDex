@@ -76,6 +76,17 @@
   height: 100%;
 }
 
+.pk__warning {
+  display: none;
+  position: absolute;
+  top: -40px;
+  background-color: #fff;
+}
+
+.pk__warning--open {
+  display: block;
+}
+
 .loading {
   background-color: #e6e6e6;
   color: #e6e6e6;

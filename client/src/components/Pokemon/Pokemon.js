@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from '../Image';
 import Button from '../Button';
@@ -53,7 +53,11 @@ const GET_POKEMON = (id, name) => {
   `;
 }
 
-const Pokemon = ({ id, name, image }) => {
+const Pokemon = (pokemonBase) => {
+  const { id, name, image } = pokemonBase.pokemonBase;
+  const [fastAttack, setFastAttack] = useState(null);
+  const [specialAttack, setSpecialAttack] = useState(null);
+  const [warningSlection, setWarningSlection] = useState(false);
   const { loading, error, data } = useQuery(GET_POKEMON(id, name));
   const mode = loading ? 'loading' : '';
   const fastGrpId = 'fast-grp';
@@ -68,7 +72,21 @@ const Pokemon = ({ id, name, image }) => {
     types, height, attacks } = pokemonData;
 
   const selectPokemon = () => {
+    if (fastAttack && specialAttack) {
+      // SET REDUCER WITH POKEMON DATA
+      return true;
+    }
+    setWarningSlection(true);
+    setTimeout(() => {
+      setWarningSlection(false);
+    }, 1500);
+  }
 
+  const attackChanged = (attackName, attackType) => {
+    if (attackType === 'fast') {
+      return setFastAttack(attackName);
+    }
+    return setSpecialAttack(attackName);
   }
 
   return (
@@ -128,6 +146,9 @@ const Pokemon = ({ id, name, image }) => {
                           value={name} 
                           group={fastGrpId}
                           addClass={['pk__attack__variant']}
+                          onChange={() => {
+                            attackChanged(name, 'fast')
+                          }}
                         >
                           <span className="name">{name}</span>
                           <span className="type">{type}</span>
@@ -153,6 +174,9 @@ const Pokemon = ({ id, name, image }) => {
                           value={name} 
                           group={specialGrpId}
                           addClass={['pk__attack__variant']}
+                          onChange={() => {
+                            attackChanged(name, 'special')
+                          }}
                         >
                           <span className="name">{name}</span>
                           <span className="type">{type}</span>
@@ -168,6 +192,9 @@ const Pokemon = ({ id, name, image }) => {
         </form>
       </main>
       <footer className="pk__footer">
+        <div className={['pk__warning', warningSlection ? 'pk__warning--open' : ''].join(' ')}>
+          Please select one Fast and one Special attacksf
+          </div>
         <Button addClass={['pk__select']} onClick={selectPokemon}>
           <span className="text">Pick this pokemon</span>
         </Button>
@@ -178,15 +205,11 @@ const Pokemon = ({ id, name, image }) => {
 
 
 Pokemon.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired
+  pokemonBase: PropTypes.object
 }
 
 Pokemon.defaultProps = {
-  id: null,
-  name: null,
-  image: null
+  pokemonBase: null
 }
 
 export default Pokemon;
