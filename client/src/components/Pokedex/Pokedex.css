@@ -1,0 +1,21 @@
+.pokemons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 0 10px;
+}
+
+.pokemon {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon__btn {
+  padding: 0;
+}
+
+.pokemon__name {
+  text-align: center;
+}

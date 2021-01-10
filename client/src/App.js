@@ -15,7 +15,6 @@ const App = () => {
         <Search />
         <Pokedex />
       </main>
-      <footer></footer>
     </>
   );
 }

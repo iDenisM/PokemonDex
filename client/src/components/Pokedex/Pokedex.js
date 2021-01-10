@@ -1,6 +1,7 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
 import Button from '../Button';
+import Image from '../Image';
+import { useQuery, gql } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectClick } from '../../actions'
 import './Pokedex.css';
@@ -46,7 +47,13 @@ const Pokedex = () => {
               dispatchClick(selectClick(value));
               console.log(p.name)
             }}>
-              <img src={p.image} alt={p.name}></img>
+              <Image 
+                addClass={['pokemon__img']} 
+                src={p.image} 
+                alt={p.name} 
+                width={170}
+                height={170}
+              />
             </Button>
             <div className="pokemon__name">{p.name}</div>
           </div>
