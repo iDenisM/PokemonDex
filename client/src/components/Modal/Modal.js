@@ -1,30 +1,18 @@
-import { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 import './Modal.css';
 
-const Modal = ({ opened, children, addClass, ...porps }) => {
-  const [isOpened, setIsOpened] = useState(false);
+const Modal = ({ show, children, addClass, onClose, ...porps }) => {
   let classList = ['modal'];
-
-  const openModal = () => {
-    if (!isOpened) setIsOpened(true);
-  }
-
-  const closeModal = () => {
-    if (isOpened) setIsOpened(false);
-  }
-
-  if (opened) setIsOpened(true);
-  if (isOpened) classList.push('modal--open');
+  
+  if (show) classList.push('modal--open');
 
   return (
     <div className={[...classList, ...addClass].join(' ')} {...porps}>
       <div className="modal__content" >
-        <Button onClick={() => {
-          closeModal();
-        }}>
-          <spam className="ico"></spam>
+        <Button onClick={onClose}>
+          <span className="ico"></span>
           <span className="text">Close</span>
         </Button>
         { children }
@@ -35,13 +23,14 @@ const Modal = ({ opened, children, addClass, ...porps }) => {
 }
 
 Modal.propTypes = {
-  opened: PropTypes.bool,
-  children: PropTypes.any,
-  addClass: PropTypes.array
+  show: PropTypes.bool,
+  children: PropTypes.node,
+  addClass: PropTypes.array,
+  onClose: PropTypes.func.isRequired
 }
 
 Modal.defaultProps = {
-  opened: false,
+  show: false,
   addClass: []
 };
 
