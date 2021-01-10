@@ -64,6 +64,10 @@ const Pokemon = ({ id, name, image }) => {
     weight, classification,
     types, height, attacks } = pokemonData;
 
+  const selectPokemon = () => {
+
+  }
+
   return (
     <article className="pk">
       <header className="pk__name">{name}</header>
@@ -134,13 +138,6 @@ const Pokemon = ({ id, name, image }) => {
   )
 }
 
-const template = ({ pokemon }, mode) => {
-  
-};
-
-const selectPokemon = () => {
-
-}
 
 const attackType = (attack, key, group) => {
   const { name, type, damage } = attack;
