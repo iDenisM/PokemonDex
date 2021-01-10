@@ -8,10 +8,8 @@ const pokemonListReducer = (state = [], action) => {
       } else {
         state = [...state, action.payload];
       }
-      console.log(state);
       return state;
     case 'REMOVING':
-      console.log(action.payload.id);
       const removeIndex = state.findIndex(e => e.id === action.payload.id);
       if (removeIndex !== -1) {
         state.splice(removeIndex, 1);

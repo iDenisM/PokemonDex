@@ -6,7 +6,6 @@ import { removePokemonFromList } from '../../actions';
 import './CardsDeck.css';
 
 const CardsDeck = () => {
-  console.log('--------<<<<<<');
   const pokemonList = useSelector((state) => state.pokemonList);
   const dispatchRemove = useDispatch();
   let classList = ['deck'];
@@ -16,7 +15,6 @@ const CardsDeck = () => {
     dispatchRemove(removePokemonFromList({id}));
   }
   
-  console.log('-------->>>>>>');
   return (
     <div className={classList.join(' ')}>
       {
