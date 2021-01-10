@@ -108,21 +108,27 @@ const template = ({ pokemon }, mode) => {
             <span className="value">{height?.maximum}</span>
           </div>
         </div>    
-        <div className="pk__attack">
+        <form className="pk__attack">
           <div className="pk__attack__header">Attacks:</div>
-          <div className="pk__attack__type">
+          <fieldset className="pk__attack__type">
+            <legend className="is-vHidden">Fast attack</legend>
             <div className="pk__attack__name">Fast</div>
-            {
-              attacks?.fast?.map((a, i) => attackType(a, i))
-            }
-          </div>
-          <div className="pk__attack__type">
+            <div id="fast-grp" className="pk__attack__group">
+              {
+                attacks?.fast?.map((a, i) => attackType(a, i, 'fast-grp'))
+              }
+            </div>
+          </fieldset>
+          <fieldset className="pk__attack__type">
+            <legend className="is-vHidden">Special attack</legend>
             <div className="pk__attack__name">Special</div>
-            {
-              attacks?.special?.map((a, i) => attackType(a, i))
-            }
-          </div>
-        </div>
+            <div id="special-grp" className="pk__attack__group">
+              {
+                attacks?.special?.map((a, i) => attackType(a, i, 'special-grp'))
+              }
+            </div>
+          </fieldset>
+        </form>
       </main>
       <footer className="pk__footer">
         <Button addClass={['pk__select']}>
@@ -133,14 +139,25 @@ const template = ({ pokemon }, mode) => {
   )
 };
 
-const attackType = (attack, key) => {
+const attackType = (attack, key, group) => {
   const { name, type, damage } = attack;
+  const id = `${group}-${key}`;
+
   return (
-    <Button key={key} addClass={['pk__attack__variant']}>
-      <span className="name">{name}</span>
-      <span className="type">{type}</span>
-      <span className="damage">{damage} dmg</span>
-    </Button>
+    <div key={key} className="pk__attack__variant">
+      <input 
+        id={id} 
+        className="is-vHidden"
+        type="radio" 
+        value={name} 
+        name={group} 
+      />
+      <label htmlFor={id}>
+        <span className="name">{name}</span>
+        <span className="type">{type}</span>
+        <span className="damage">Dmg: {damage}</span>
+      </label>
+    </div>
   )
 }
 

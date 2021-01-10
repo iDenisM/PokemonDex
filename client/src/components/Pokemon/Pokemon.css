@@ -12,25 +12,42 @@
 }
 
 .pk__attack__type {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 10px;
   padding-top: 10px;
 }
 
 .pk__attack__name {
-  grid-column: 1 /span 3;
   text-align: center;
 }
 
+.pk__attack__group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
 .pk__attack__variant {
+  font-size: 12px;
+}
+
+.pk__attack__variant label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e0e0e0;
-  word-break: break-all;
+  padding: 0 10px;
   min-height: 70px;
+  background-color: #e0e0e0;
+  word-break: break-word;
+}
+
+.pk__attack__variant .name {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.pk__attack__variant input:focus ~ label {
+  outline: -webkit-focus-ring-color auto 1px;
 }
 
 .pk__footer {
