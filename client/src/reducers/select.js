@@ -1,7 +1,8 @@
 const selectorReducer = (state = '', action) => {
   switch (action.type) {
     case 'SELECTING':
-      return action.payload
+      state = action.payload;
+      return state;
     default:
       return state;
   }

@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import searcherReducer from './search';
 import selectorReducer from './select';
-import addingPokemonReducer from './addPokemon';
+import pokemonListReducer from './pokemonList';
 
 const rootReducers = combineReducers({
   textSearch: searcherReducer,
   select: selectorReducer,
-  addPokemon: addingPokemonReducer
+  pokemonList: pokemonListReducer
 })
 
 export default rootReducers;

@@ -1,0 +1,14 @@
+.deck {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #c7afaf;
+}
+
+.deck--open {
+  display: grid;
+}
