@@ -13,7 +13,7 @@ export const addPokemonToList = (value) => ({
   payload: value
 })
 
-// export const removePokemonFromList = (value) => ({
-//   type: 'REMOVING',
-//   payload: value
-// })
+export const removePokemonFromList = (value) => ({
+  type: 'REMOVING',
+  payload: value
+})

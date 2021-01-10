@@ -5,7 +5,7 @@ import Button from '../Button';
 import RadioInput from '../RadioInput';
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from 'react-redux';
-import { selectPokemonClick, addPokemonToList } from '../../actions'
+import { selectPokemonClick, addPokemonToList } from '../../actions';
 import './Pokemon.css';
 
 const GET_POKEMON = (id, name) => {
