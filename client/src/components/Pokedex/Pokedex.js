@@ -45,7 +45,6 @@ const Pokedex = () => {
                 image: p.image
               }
               dispatchClick(selectClick(value));
-              console.log(p.name)
             }}>
               <Image 
                 addClass={['pokemon__img']} 
