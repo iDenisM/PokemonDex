@@ -23,7 +23,7 @@ const PokemonLayer = () => {
   console.log(isOpened);
 
   return (
-    <Modal show={isOpened} onClose={toggleModal}>
+    <Modal addClass={['modal__pokemon']} show={isOpened} onClose={toggleModal}>
       <Pokemon id={id} name={name} image={image} />
     </Modal>
   )

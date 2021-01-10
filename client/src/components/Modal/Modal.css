@@ -1,0 +1,29 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.modal__content {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.modal__overlay {
+  position: absolute;
+  background-color: #27272762;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}

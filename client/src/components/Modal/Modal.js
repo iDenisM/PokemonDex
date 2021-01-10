@@ -6,7 +6,12 @@ import './Modal.css';
 const Modal = ({ show, children, addClass, onClose, ...porps }) => {
   let classList = ['modal'];
   
-  if (show) classList.push('modal--open');
+  if (show) {
+    document.body.classList.add('scroll-off');
+    classList.push('modal--open');
+  } else {
+    document.body.classList.remove('scroll-off');
+  }
 
   return (
     <div className={[...classList, ...addClass].join(' ')} {...porps}>
@@ -17,7 +22,7 @@ const Modal = ({ show, children, addClass, onClose, ...porps }) => {
         </Button>
         { children }
       </div>
-      <div className="modal__overlay"></div>
+      <div className="modal__overlay" onClick={onClose}></div>
     </div>
   )
 }
