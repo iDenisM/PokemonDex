@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header';
 import Search from './components/Search';
 import Pokedex from './components/Pokedex';
-import PokemonLayer from './components/PokemonLayer';
+import PokemonModal from './components/PokemonModal';
 
 const App = () => {
   
@@ -11,7 +11,7 @@ const App = () => {
     <>
       <Header/>
       <main>
-        <PokemonLayer />
+        <PokemonModal />
         <Search />
         <Pokedex />
       </main>
