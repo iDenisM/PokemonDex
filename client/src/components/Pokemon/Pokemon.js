@@ -51,6 +51,18 @@ const GET_POKEMON = (id, name) => {
   `;
 }
 
+const Pokemon = ({ id, name, image }) => {
+  const { loading, error, data } = useQuery(GET_POKEMON(id, name));
+  const mode = loading ? 'loading' : '';
+
+  if (loading) return template({pokemon: {
+    id, name, image
+  }}, mode);
+  if (error) return <h2>Whoops... somthing went wrong!</h2>
+
+  return template(data, mode);
+}
+
 const template = ({ pokemon }, mode) => (
   <div>
     <div className="pk__img">
@@ -67,18 +79,6 @@ const template = ({ pokemon }, mode) => (
     </div>    
   </div>
 )
-
-const Pokemon = ({ id, name, image }) => {
-  const { loading, error, data } = useQuery(GET_POKEMON(id, name));
-  const mode = loading ? 'loading' : '';
-
-  if (loading) return template({pokemon: {
-    id, name, image
-  }}, mode);
-  if (error) return <h2>Whoops... somthing went wrong!</h2>
-
-  return template(data, mode);
-}
 
 Pokemon.propTypes = {
   id: PropTypes.string.isRequired,

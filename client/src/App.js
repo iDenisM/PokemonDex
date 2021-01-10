@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header';
 import Search from './components/Search';
 import Pokedex from './components/Pokedex';
-import Pokemon from './components/Pokemon';
+import PokemonLayer from './components/PokemonLayer';
 
 const App = () => {
   
@@ -11,7 +11,7 @@ const App = () => {
     <>
       <Header/>
       <main>
-        <Pokemon id="UG9rZW1vbjowMDM=" name="Venusaur" image="https://img.pokemondb.net/artwork/venusaur.jpg" />
+        <PokemonLayer />
         <Search />
         <Pokedex />
       </main>

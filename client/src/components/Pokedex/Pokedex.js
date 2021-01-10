@@ -1,7 +1,8 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import Button from '../Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectClick } from '../../actions'
 import './Pokedex.css';
 
 const ALL_POKEMONS = gql`
@@ -17,6 +18,7 @@ const ALL_POKEMONS = gql`
 
 const Pokedex = () => {
   const { loading, error, data } = useQuery(ALL_POKEMONS);
+  const dispatchClick = useDispatch();
   const selectSearchProduct = (state) => state.textSearch;
   const textSearch = useSelector(selectSearchProduct);
 
@@ -36,7 +38,12 @@ const Pokedex = () => {
         data.pokemons.filter(filterMap[task]).map(p => (
           <div className="pokemon" key={p.id}>
             <Button addClass={['pokemon__btn']} onClick={() => {
-              // Set the reducer for the active pokemon with the data of id, name, image
+              const value = {
+                id: p.id,
+                name: p.name,
+                image: p.image
+              }
+              dispatchClick(selectClick(value));
               console.log(p.name)
             }}>
               <img src={p.image} alt={p.name}></img>
