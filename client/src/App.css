@@ -1,11 +1,4 @@
-body,
-input,
-button,
-div,
-article,
-footer,
-header,
-main {
+* {
   box-sizing: border-box;
 }
 

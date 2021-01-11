@@ -1,20 +1,9 @@
-import GameState from '../game/GameState';
+export default class Engine {
+  constructor() {
+    console.log('ENGINE LOADED');
+  }
 
-new GameState();
-
-const engineWorker = () => {
-  onmessage = event => {
-    if (!event) return;
-    let msg = '';
-
-    if (event.data === 'Fetch Users') {
-      msg = 'OK';
-    } else {
-      msg = 'NO'
-    }
-
-    postMessage(msg);
+  start() {
+    console.log('START GAME');
   }
 }
-
-export default engineWorker;

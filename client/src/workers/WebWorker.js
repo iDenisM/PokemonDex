@@ -1,7 +1,10 @@
-export default class WebWorker {
-  constructor(worker) {
-    const code = worker.toString();
-    const blob = new Blob(["(" + code + ")()"]);
-    return new Worker(URL.createObjectURL(blob));
-  }
-}
+import { expose } from 'comlink';
+import Engine from './Engine';
+
+const engine = new Engine();
+
+const exports = {
+  start: engine.start()
+};
+
+expose(exports);
