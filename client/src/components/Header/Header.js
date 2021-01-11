@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import Image from '../Image';
 import Button from '../Button';
 import logo from '../../static/Pokemon-Logo.png';
