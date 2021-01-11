@@ -1,8 +1,8 @@
-import GameState from '../../src/game/GameState';
+import GameState from '../game/GameState';
 
 new GameState();
 
-self.onmessage = async e => {
+onmessage = async e => {
   console.log(e.data.msg);
   if (e.data.msg === 'ADD_BOT') {
 
