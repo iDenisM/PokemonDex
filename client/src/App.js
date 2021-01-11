@@ -6,6 +6,7 @@ import PokemonModal from './components/PokemonModal';
 import CardsDeck from './components/CardsDeck/CardsDeck';
 import Board from './components/Board';
 
+
 const App = () => {
   return (
     <>

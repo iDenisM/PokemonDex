@@ -6,4 +6,12 @@ export default class Engine {
   start() {
     console.log('START GAME');
   }
+
+  reset() {
+    console.log('RESET GAME');
+  }
+
+  end() {
+    console.log('END GAME');
+  }
 }

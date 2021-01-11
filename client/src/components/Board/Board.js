@@ -1,18 +1,18 @@
 import './Board.css';
 import React from 'react';
-import { wrap } from 'comlink';
-
-const startGame = () => {
-  const worker = new Worker('./worker/WebWorker', { name: 'WebWorker', type: 'module' });
-  const workerApi = wrap(worker);
-  workerApi.startGame();    
-}
+import { start, reset, end } from '../../worker';
 
 const Board = () => {
   return (
     <div>
-      <button className="btn-worker" onClick={this.startGame}>
+      <button className="btn-worker" onClick={start}>
         START GAME
+      </button>
+      <button className="btn-worker" onClick={reset}>
+        RESET GAME
+      </button>
+      <button className="btn-worker" onClick={end}>
+        END GAME
       </button>
     </div>
   )
