@@ -12,13 +12,27 @@
 }
 
 .pk__desc {
+  flex-grow: 1;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  font-size: 0.8rem;
+}
+
+.pk__content {
+  display: flex;
+  font-size: 0.7rem;
+}
+
+.pk__attack {
+  margin-top: 10px;
 }
 
 .pk__attack__type {
   padding-top: 10px;
+}
+
+.pk__attack__type:first-of-type {
+  padding-top: 0;
 }
 
 .pk__attack__name {

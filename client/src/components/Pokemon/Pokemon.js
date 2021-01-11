@@ -105,14 +105,19 @@ const Pokemon = (pokemonBase) => {
       <main className="pk__desc">
         <div className="pk__desc__header">Characteristics</div>
         <div className="pk__content pk__class">{classification}</div>
-        <div className="pk__content pk__types">
-          <div className="pk__types__header">Types</div>
-          {
-            types?.map((type, i) => (
-              <div key={i}>{type}</div>
-            ))
-          }
-        </div>
+        {
+          types?.length > 0 && (
+            <div className="pk__content pk__types">
+              <span>Types:</span>
+              <span>[
+                {
+                  types.join(', ')
+                }
+              ]</span>
+            </div>
+          )
+        }
+        
         <div className={['pk__content', 'pk__weight', mode].join(' ')}>
           <div className='pk__content__header'>Weight:</div>
           <div className={['pk__weight--min', mode].join(' ')}>
