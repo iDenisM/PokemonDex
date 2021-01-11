@@ -96,10 +96,12 @@ const Pokemon = (pokemonBase) => {
 
   return (
     <article className="pk">
-      <header className="pk__name">{name}</header>
-      <div className="pk__img">
-        <Image src={image} alt={name} width={200} height={200} />
-      </div>
+      <header className="pk__header">
+        <h2 className="pk__name">{name}</h2>
+        <div className="pk__img">
+          <Image src={image} alt={name} width={200} height={200} />
+        </div>
+      </header>
       <main className="pk__desc">
         <div className="pk__desc__header">Characteristics</div>
         <div className="pk__content pk__class">{classification}</div>
