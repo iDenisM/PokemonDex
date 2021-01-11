@@ -17,3 +17,7 @@ export const removePokemonFromList = (value) => ({
   type: 'REMOVING',
   payload: value
 })
+
+export const toggleStartEndGame = () => ({
+  type: 'STARTENDGAME'
+})
