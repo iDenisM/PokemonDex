@@ -1,53 +1,8 @@
-.deck {
-  --deck-height: 83px;
-  grid-template-columns: repeat(5, 1fr);
-  column-gap: 10px;
-  padding: 10px;
-  position: fixed;
+.deck__player {
   bottom: 0;
-  width: 100%;
-  height: var(--deck-height);
-  background-color: #928080f7;
-  transform: translate3d(0, var(--deck-height), 0);
-  transition: transform 0.2s ease-in;
+  transform: translate3d(0, 83px, 0);
 }
 
-.deck--open {
-  display: grid;
+.deck__player.deck--open {
   transform: translate3d(0, 0, 0);
-}
-
-.deck__card {
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  border: 1px solid #0000008a;
-}
-
-.deck__close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #6d6d6d80;
-  width: 25px;
-  height: 25px;
-  padding: 0;
-  border-radius: 50%;
-}
-
-.deck__close .ico::before,
-.deck__close .ico::after {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 2px;
-  background-color: #000;
-  position: absolute;
-  top: 12px;
-  right: 2px;
-  transform: rotate(45deg);
-}
-
-.deck__close .ico::after {
-  transform: rotate(-45deg);
 }

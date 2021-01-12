@@ -1,11 +1,12 @@
 import './Board.css';
 import { useState } from 'react';
 import Modal from '../Modal';
+import Button from '../Button';
+import PlayerDeck from '../PlayerDeck';
+import BotDeck from '../BotDeck';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleStartEndGame } from '../../actions'
 import { reset, end } from '../../worker';
-import Button from '../Button';
-import PlayerDeck from '../PlayerDeck';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -33,9 +34,9 @@ const Board = () => {
 
   return (
     <>
+      <BotDeck />
       <article className={boardClassList.join(' ')}>
         <header className="is-vHidden">Let's Play</header>
-        {/* BOARD */}
         <Modal addClass={['board__modal']} onClose={endGame}>
           <Button addClass={['board__modal__close']} onClick={resetGame}>
             <span className="text">Restart Game</span>

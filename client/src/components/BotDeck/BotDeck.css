@@ -1,0 +1,9 @@
+.deck__bot {
+  top: 55px;
+  transform: translate3d(0, -83px, 0);
+  z-index: 1;
+}
+
+.deck__bot.deck--open {
+  transform: translate3d(0, 0, 0);
+}
