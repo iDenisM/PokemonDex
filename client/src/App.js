@@ -15,8 +15,8 @@ const App = () => {
         <Search />
         <Pokedex />
         <PokemonModal />
-        <CardsDeck />
         <Board />
+        <CardsDeck />
       </main>
     </>
   );
