@@ -1,5 +1,7 @@
+import Card from './Card';
+
 export default class Engine {
-  cards = [];
+  allCards = [];
   botCards = [];
   _playerCards = [];
 
@@ -7,30 +9,14 @@ export default class Engine {
     console.log('ENGINE LOADED');
   }
 
-  /**
-   * Get the player cards
-   */
-  get playerCards() {
-    return this._playerCards;
-  }
-
-  /**
-   * Set the player cards and the create 
-   * deck for the bot
-   */
-  set playerCards(playerCards) {
-    this._playerCards = playerCards;
-    this._createBotDeck();
-  }
-
   addCards(cards) {
-    this.cards = cards;
+    this.allCards = cards;
   }
 
   start(playerCards) {
     console.log('START GAME');
-    // Get player pokemons
-    // this.playerCards = playerCards;
+    // Create Player Deck
+    // this._createPlayerDeck(playerCards);
   }
 
   reset() {
@@ -41,12 +27,20 @@ export default class Engine {
     console.log('END GAME');
   }
 
+  _createCard(d) {
+
+  }
+
+  _createPlayerDeck(playerCards) {
+
+  }
+
   /**
    * Create the deck for the bot
    */
   _createBotDeck() {
-    if (this.cards.length === 0) return this.botCards;
-    for (const pCard of this.playerCards) {
+    if (this.allCards.length === 0) return this.botCards;
+    for (const pCard of this.playerDeck) {
       this._addCardToBotDeck(pCard);
     }
     // TODO: Think of adding a check if bot's deck
@@ -73,11 +67,11 @@ export default class Engine {
 
   /**
    * Get a random card from the cards
-   * list with the CP > 90% and < 110% 
+   * list with the CP > 80% and < 120% 
    * of player's card CP
    * @param {object} pCard 
    */
   _getyCardFromCards(pCard) {
-    return this.cards.find(c => c.maxCP < pCard.maxCP * 1.1 && c.maxCP > pCard.maxCP * 0.9 && c.id != card.id);
+    return this.allCards.find(c => c.maxCP < pCard.maxCP * 1.2 && c.maxCP > pCard.maxCP * 0.8 && c.id != card.id);
   }
 }

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleStartEndGame } from '../../actions'
 import { reset, end } from '../../worker';
 import Button from '../Button';
+import PlayerDeck from '../PlayerDeck';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -31,18 +32,21 @@ const Board = () => {
   if (isOpened) boardClassList.push('board--open');
 
   return (
-    <article className={boardClassList.join(' ')}>
-      <header className="is-vHidden">Let's Play</header>
-
-      <Modal addClass={['board__modal']} onClose={endGame}>
-        <Button addClass={['board__modal__close']} onClick={resetGame}>
-          <span className="text">Restart Game</span>
-        </Button>
-        <Button addClass={['board__modal__close']} onClick={endGame}>
-          <span className="text">End Game</span>
-        </Button>
-      </Modal>
-    </article>
+    <>
+      <article className={boardClassList.join(' ')}>
+        <header className="is-vHidden">Let's Play</header>
+        {/* BOARD */}
+        <Modal addClass={['board__modal']} onClose={endGame}>
+          <Button addClass={['board__modal__close']} onClick={resetGame}>
+            <span className="text">Restart Game</span>
+          </Button>
+          <Button addClass={['board__modal__close']} onClick={endGame}>
+            <span className="text">End Game</span>
+          </Button>
+        </Modal>
+      </article>
+      <PlayerDeck />
+    </>
   )
 }
 
