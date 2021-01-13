@@ -5,6 +5,7 @@ import Modal from '../Modal';
 import { useDispatch } from 'react-redux';
 import { doStartGame, doEndGame } from '../../actions'
 import { useSelector } from 'react-redux';
+import Engine from '../../Engine';
 
 const Header = () => {
   const [tryStartGame, setTryStarGame] = useState(false);
@@ -20,6 +21,7 @@ const Header = () => {
   }
 
   const startGame = () => {
+    Engine.startGame();
     if (updatedPlayerCards.length === 0) {
       showWarningOnScreen();
     } else if (!game.started && !game.isStarting) {

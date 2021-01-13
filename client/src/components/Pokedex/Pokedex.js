@@ -2,22 +2,11 @@ import './Pokedex.css';
 import React from 'react';
 import Button from '../Button';
 import Image from '../Image';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPokemonClick } from '../../actions'
-
-const ALL_POKEMONS = (number) => {
-  return gql`
-  {
-    pokemons(first: ${number}){
-      id
-      name
-      types
-      image
-    }
-  }
-`;
-}
+import { ALL_POKEMONS } from '../../queries'
+import Engine from '../../Engine';
 
 const Pokedex = () => {
   const { loading, error, data } = useQuery(ALL_POKEMONS(20));
@@ -30,6 +19,8 @@ const Pokedex = () => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <h2>Whoops... somthing went wrong!</h2>
+
+  Engine.addCards(data.pokemons);
 
   const filterMap = {
     All: () => true,

@@ -1,3 +1,4 @@
+import './Pokemon.css';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from '../Image';
@@ -6,54 +7,7 @@ import RadioInput from '../RadioInput';
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { selectPokemonClick, addPokemonToList } from '../../actions';
-import './Pokemon.css';
-
-const GET_POKEMON = (id, name) => {
-  return gql`
-    {
-      pokemon(id: "${id}", name: "${name}") {
-        id
-        name
-        weight {
-          minimum
-          maximum
-        }
-        height {
-          minimum
-          maximum
-        }
-        classification
-        types
-        resistant
-        attacks {
-          fast {
-            name
-            type
-            damage
-          }
-          special {
-            name
-            type
-            damage
-          }
-        }
-        weaknesses
-        fleeRate
-        maxCP
-        evolutions {
-          id
-          name
-        }
-        evolutionRequirements {
-          amount
-          name
-        }
-        maxHP
-        image
-      }
-    }
-  `;
-}
+import { GET_POKEMON } from '../../queries'
 
 const Pokemon = (pokemonBase) => {
   const { id, name, image } = pokemonBase.pokemonBase;
