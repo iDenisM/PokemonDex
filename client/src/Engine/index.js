@@ -29,6 +29,8 @@ class Engine {
         this.botDraftCards?.length > 0
     } else {
       this._gameStarted = false;
+      this._playerCards = [];
+      this.botDraftCards = [];
     }
   }
 
@@ -58,15 +60,15 @@ class Engine {
     let draftBots = [];
 
     const findFn = (currentCard, playerCard) => {
-      const a = currentCard.id != playerCard.id;
-      const b = currentCard.maxCP > playerCard.maxCP * minThreshold;
-      const c = currentCard.maxCP < playerCard.maxCP * maxThreshold;
+      const a = !this._playerCards.find(b => b.id === currentCard.id)  
+      const b = !draftBots.find(b => b.id === currentCard.id)
+      const c = currentCard.maxCP > playerCard.maxCP * minThreshold;
+      const d = currentCard.maxCP < playerCard.maxCP * maxThreshold;
 
-      return a && (b || c);
+      return a && b && (c || d);
     }
     for (const card of this._playerCards) {
       const bot = this._allCards.find(c => findFn(c, card))
-      console.log(bot);
       if (bot) draftBots.push(bot);
     }
 

@@ -7,7 +7,7 @@ import Engine from '../../Engine';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const triggeredToOpen = useSelector((state) => state.gameState);
+  const gameStarted = useSelector((state) => state.gameStarted);
 
   const toggleBoard = () => {
     setIsOpened(!isOpened)
@@ -15,8 +15,8 @@ const Board = () => {
 
   let boardClassList = ['board'];
 
-  if (triggeredToOpen && !isOpened) toggleBoard();
-  if (!triggeredToOpen && isOpened) toggleBoard();
+  if (gameStarted && !isOpened) toggleBoard();
+  if (!gameStarted && isOpened) toggleBoard();
   if (isOpened) boardClassList.push('board--open');
 
   return (

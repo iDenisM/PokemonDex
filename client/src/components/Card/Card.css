@@ -32,3 +32,7 @@
 .card__close .ico::after {
   transform: rotate(-45deg);
 }
+
+.card__close--hide .card__close {
+  display: none;
+}

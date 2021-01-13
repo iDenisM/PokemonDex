@@ -10,7 +10,7 @@ const rootReducers = combineReducers({
   select: selectorReducer,
   pokemonList: pokemonListReducer,
   botPokemonList: botPokemonListReduce,
-  gameState: gameReducer
+  gameStarted: gameReducer
 })
 
 export default rootReducers;

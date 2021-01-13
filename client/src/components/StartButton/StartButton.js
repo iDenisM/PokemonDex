@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { doStartGame, doEndGame, addBots } from '../../actions'
+import { doStartGame, doEndGame, addBots, removeBots } from '../../actions'
 import Engine from '../../Engine';
 
 const Header = () => {
@@ -33,12 +33,15 @@ const Header = () => {
   }
 
   const endGame = () => {
-    // end();
+    Engine.endGame()
+    dispatchEvent(removeBots());
     dispatchEvent(doEndGame());
+    setShowCloseWarning(false);
+    setShowGameBoard(false);
   }
 
   const resetGame = () => {
-    // reset();
+    // Engine.reset();
   }
   
   const showWarningOnScreen = () => {

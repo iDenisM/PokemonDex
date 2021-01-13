@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const BotDeck = () => {
   const cards = useSelector((state) => state.botPokemonList);
   
-  let classList = ['deck__bot'];
+  let classList = ['deck__bot', 'card__close--hide'];
   if (cards.length) classList.push('deck--open');
 
   return (
