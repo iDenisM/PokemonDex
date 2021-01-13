@@ -25,3 +25,12 @@ export const doStartGame = () => ({
 export const doEndGame = () => ({
   type: 'ENDGAME'
 })
+
+export const addBots = (value) => ({
+  type: 'ADDINGBOTS',
+  payload: value
+})
+
+export const removeBots = () => ({
+  type: 'REMOVEINGBOTS'
+})

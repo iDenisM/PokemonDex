@@ -1,9 +1,9 @@
-import { useQuery, gql } from '@apollo/client';
 
 class Engine {
   _gameStarted = false;
   _playerCards = [];
   _botCards = [];
+  botDraftCards = [];
 
   constructor() {
     if (!Engine.instance) {
@@ -20,13 +20,13 @@ class Engine {
   set gameStarted(start) {
     if (start) {
       
-      this._createBotDeck();
+      this.botDraftCards = this._createDraftBotDeck();
 
       this._gameStarted = 
         !this.gameStarted &&
         this._allCards?.length > 0 &&
         this._playerCards?.length > 0 &&
-        this._botCards?.length > 0
+        this.botDraftCards?.length > 0
     } else {
       this._gameStarted = false;
     }
@@ -48,19 +48,29 @@ class Engine {
     this._playerCards = cards;
   }
 
-  _createBotDeck() {
+  addBotCard(card) {
+    this._botCards.push(card);
+  }
+
+  _createDraftBotDeck() {
     const minThreshold = 0.8;
     const maxThreshold = 1.2;
-    const findFn = (c, card) => {
-      const a = c.maxCP > card.maxCP * minThreshold;
-      const b = c.maxCP < card.maxCP * maxThreshold;
+    let draftBots = [];
 
-      debugger
-      return a || b;
+    const findFn = (currentCard, playerCard) => {
+      const a = currentCard.id != playerCard.id;
+      const b = currentCard.maxCP > playerCard.maxCP * minThreshold;
+      const c = currentCard.maxCP < playerCard.maxCP * maxThreshold;
+
+      return a && (b || c);
     }
     for (const card of this._playerCards) {
-      this._botCards = this._allCards.find(c => findFn(c, card))
+      const bot = this._allCards.find(c => findFn(c, card))
+      console.log(bot);
+      if (bot) draftBots.push(bot);
     }
+
+    return draftBots;
   }
 }
 

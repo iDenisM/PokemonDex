@@ -5,7 +5,7 @@ import Card from '../Card';
 import { useDispatch } from 'react-redux';
 import { removePokemonFromList } from '../../actions';
 
-const Deck = ({ cards, addClass }) => {
+const Deck = ({ cards, children, addClass }) => {
   const dispatchRemove = useDispatch();
 
   const removeCard = (id) => {
@@ -15,18 +15,19 @@ const Deck = ({ cards, addClass }) => {
   return (
     <section className={['deck', ...addClass].join(' ')}>
       {
-        cards.length > 0 && cards.map(card => (
+        cards && cards.length > 0 && cards.map(card => (
           <Card key={card.id} card={card} onClick={() => {
             removeCard(card.id)
           }} />
         ))
       }
+      { children }
     </section>
   )
 }
 
 Deck.propTypes = {
-  cards: PropTypes.array.isRequired,
+  cards: PropTypes.array,
   addClass: PropTypes.array,
 }
 

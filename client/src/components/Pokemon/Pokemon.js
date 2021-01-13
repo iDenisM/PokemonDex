@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Image from '../Image';
 import Button from '../Button';
 import RadioInput from '../RadioInput';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { selectPokemonClick, addPokemonToList } from '../../actions';
 import { GET_POKEMON } from '../../queries'
@@ -31,7 +31,7 @@ const Pokemon = (pokemonBase) => {
   const selectPokemon = () => {
     if (fastAttack && specialAttack) {
       // SET REDUCER WITH POKEMON DATA
-      dispatchEvent(addPokemonToList({ id, name, image }))
+      dispatchEvent(addPokemonToList(pokemonData))
       dispatchEvent(selectPokemonClick(null));
       return true;
     }

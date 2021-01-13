@@ -2,13 +2,12 @@ import './StartButton.css';
 import { useState } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
-import { useDispatch } from 'react-redux';
-import { doStartGame, doEndGame } from '../../actions'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { doStartGame, doEndGame, addBots } from '../../actions'
 import Engine from '../../Engine';
 
 const Header = () => {
-  const [tryStartGame, setTryStarGame] = useState(false);
+  const [showGameBoard, setShowGameBoard] = useState(false);
   const [showNoCardsWarning, setShowNoCardsWarning] = useState(false);
   const [showCloseWarning, setShowCloseWarning] = useState(false);
 
@@ -19,16 +18,20 @@ const Header = () => {
   if (game.started) {
     dispatchEvent(doStartGame());
   }
-
+  
   const startGame = () => {
     Engine.startGame();
-    if (updatedPlayerCards.length === 0) {
-      showWarningOnScreen();
-    } else if (!game.started && !game.isStarting) {
-      setTryStarGame(state => !state);
-    } else if (game.started) {
-      setShowCloseWarning(true);
+    dispatchEvent(addBots(Engine.botDraftCards));
+    if (Engine.gameStarted) {
+      setShowGameBoard(true);
     }
+    // if (updatedPlayerCards.length === 0) {
+    //   showWarningOnScreen();
+    // } else if (!game.started && !game.isStarting) {
+    //   setTryStarGame(state => !state);
+    // } else if (game.started) {
+    //   setShowCloseWarning(true);
+    // }
   }
 
   const endGame = () => {
