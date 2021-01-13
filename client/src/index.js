@@ -21,7 +21,8 @@ const client = new ApolloClient({
 
 let store = createStore(rootReducers);
 
-ReactDOM.render(
+// ReactDOM.render(   //USE THIS FOR CSR
+ReactDOM.hydrate(   //USE THIS FOR SSR
   <ApolloProvider client={client}>
     <React.StrictMode> {/* Remove react strict mode at the end of the project */}
       <Provider store={store}>
