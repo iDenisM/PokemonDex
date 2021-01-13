@@ -15,46 +15,45 @@ export const useAddPlayerCards = (playerCards) => {
   }, [workerApi, playerCards]);
 }
 
-export const useStartGame = (playerCards) => {
+export const useStartGame = (tryStartGame) => {
+  const { workerApi } = useWorker();
   const [data, setData] = useState({
     isStarting: false,
     botCards: [],
     ready: false
   });
-
-  const { workerApi } = useWorker();
-
+  
   useEffect(() => {
     setData({ isStarting: true, botCards: [], ready: false });
 
     const fetchData = async () => {
       const cards = await workerApi.start();
-
+      console.log('---Data Fetched');
       setData({ isStarting: false, botCards: cards, ready: cards })
     };
- 
+    
     fetchData();
-  }, [workerApi, playerCards, setData]);
+  }, [workerApi, tryStartGame, setData]);
 
   return data;
 }
 
 export const useEndGame = () => {
   const [data, setData] = useState({
-    isCalculating: false,
+    isStarting: false,
     botCards: [],
-    ready: false
+    started: false
   });
 
   const { workerApi } = useWorker();
 
   useEffect(() => {
-    setData({ isCalculating: true, botCards: [], ready: false });
+    setData({ isStarting: true, botCards: [], started: false });
 
     workerApi
       .start()
-      .then(started => {
-        setData({ isCalculating: false, botCards: started, ready: started })
+      .then(ready => {
+        setData({ isStarting: false, botCards: ready, started: ready })
       });
   }, [workerApi, setData]);
 

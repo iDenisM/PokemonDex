@@ -8,23 +8,30 @@ import { useSelector } from 'react-redux';
 import { useStartGame, useAddPlayerCards } from "../../worker";
 
 const Header = () => {
+  const [tryStartGame, setTryStarGame] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
-  const [boardIsVisible, setBoardIsVisible] = useState(false);
   const [showClose, setShowClose] = useState(false);
+
   const updatedPlayerCards = useSelector((state) => state.pokemonList);
   const dispatchEvent = useDispatch();
+
   useAddPlayerCards(updatedPlayerCards);
-  const start = useStartGame(updatedPlayerCards);
+  const game = useStartGame(tryStartGame);
 
   const startGame = () => {
-    if (boardIsVisible && start.ready) {
-      setShowClose(true);
-    } else if (start.ready) {
-      setBoardIsVisible(true);
-      // dispatchEvent(toggleStartEndGame());
-    } else {
+    if (updatedPlayerCards.length === 0) {
       showWarningOnScreen();
+    } else if (!game.started && !game.isStarting) {
+      setTryStarGame(state => !state);
     }
+    // if (playBoardIsVisible && start.ready) {
+    //   setShowClose(true);
+    // } else if (start.ready) {
+    //   setPlayBoardIsVisible(true);
+    //   // dispatchEvent(toggleStartEndGame());
+    // } else {
+    //   showWarningOnScreen();
+    // }
   }
 
   const endGame = () => {
@@ -47,7 +54,7 @@ const Header = () => {
     <>
       <Button addClass={['header__btn']} onClick={startGame} >
         {
-          boardIsVisible ? 
+          game.started ? 
           (<span className="text">End Game</span>) :
           (<span className="text">Start Game</span>)
         }

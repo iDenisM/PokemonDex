@@ -26,7 +26,6 @@ export default class Engine {
 
   addPlayerCards(playerCards) {
     this._playerCards = playerCards && playerCards.length > 0 ? playerCards : [];
-    console.log('---PLAYER CARDS ADDED----', this._playerCards);
     // Create Player Deck
     // this._createPlayerDeck(playerCards);
   }
