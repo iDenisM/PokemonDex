@@ -11,16 +11,6 @@ import { toggleStartEndGame } from '../../actions'
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
   const triggeredToOpen = useSelector((state) => state.startEndGame);
-  const dispatchEvent = useDispatch();
-
-  const endGame = () => {
-    // end();
-    dispatchEvent(toggleStartEndGame());
-  }
-
-  const resetGame = () => {
-    // reset();
-  }
 
   const toggleBoard = () => {
     setIsOpened(!isOpened)
@@ -37,14 +27,7 @@ const Board = () => {
       <BotDeck />
       <article className={boardClassList.join(' ')}>
         <header className="is-vHidden">Let's Play</header>
-        <Modal addClass={['board__modal']} onClose={endGame}>
-          <Button addClass={['board__modal__close']} onClick={resetGame}>
-            <span className="text">Restart Game</span>
-          </Button>
-          <Button addClass={['board__modal__close']} onClick={endGame}>
-            <span className="text">End Game</span>
-          </Button>
-        </Modal>
+        
       </article>
       <PlayerDeck />
     </>

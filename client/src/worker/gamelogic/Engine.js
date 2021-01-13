@@ -1,24 +1,44 @@
 import Card from './Card';
 
 export default class Engine {
+  _gameStarted = false;
   allCards = [];
-  botCards = [];
+  _botCards = [];
   _playerCards = [];
 
   constructor() {
     console.log('ENGINE LOADED');
   }
 
+  get startGame() {
+    return this._gameStarted;
+  }
+
+  set startGame(start) {
+    this._gameStarted = start
+    // DO THINGS IF GAME STARTED
+    // DO THINGS IF GAME ENDTED
+  }
+
   addCards(cards) {
     this.allCards = cards;
   }
 
-  start(playerCards) {
-    if (!playerCards || playerCards.length === 0) return [];
-    console.log('START GAME');
+  addPlayerCards(playerCards) {
+    this._playerCards = playerCards && playerCards.length > 0 ? playerCards : [];
+    console.log('---PLAYER CARDS ADDED----', this._playerCards);
     // Create Player Deck
     // this._createPlayerDeck(playerCards);
-    return playerCards;
+  }
+
+  start() {
+    console.log('----TRYING TO STAR GAME----');
+    this.startGame = 
+      this.allCards?.length > 0 &&
+      this._playerCards?.length > 0 && 
+      this._botCards?.length > 0;
+    console.log('----STARING GAME----', this.startGame);
+    return this.startGame;
   }
 
   reset() {
@@ -41,7 +61,7 @@ export default class Engine {
    * Create the deck for the bot
    */
   _createBotDeck() {
-    if (this.allCards.length === 0) return this.botCards;
+    if (this.allCards.length === 0) return this._botCards;
     for (const pCard of this.playerDeck) {
       this._addCardToBotDeck(pCard);
     }
@@ -58,13 +78,13 @@ export default class Engine {
   _addCardToBotDeck(pCard) {
     let card = this._getyCardFromCards(pCard);
 
-    if (this.botCards.length != 0) {
-      while (this.botCards.find(c => c.id === card.id)) {
+    if (this._botCards.length != 0) {
+      while (this._botCards.find(c => c.id === card.id)) {
         card = this._getyCardFromCards(pCard);
       }
     }
 
-    return this.botCards.push(card);
+    return this._botCards.push(card);
   }
 
   /**

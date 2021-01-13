@@ -14,10 +14,3 @@
   grid-column: 1/2;
   margin-left: var(--base-padding);
 }
-
-.header__btn {
-  grid-column: 3/4;
-  height: calc(100% - 10px);
-  margin-right: var(--base-padding);
-  width: 130px;
-}

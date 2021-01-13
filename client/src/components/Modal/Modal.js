@@ -31,7 +31,7 @@ Modal.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node,
   addClass: PropTypes.array,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func
 }
 
 Modal.defaultProps = {
