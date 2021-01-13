@@ -6,10 +6,6 @@ import { useSelector } from 'react-redux';
 
 const BotDeck = () => {
   const cards = useSelector((state) => state.botPokemonList);
-  // const cards = [
-  //   {id: 'UG9rZW1vbjowMDE=', name: 'Bulbasaur'},
-  //   {id: 'UG9rZW1vbjowMDI=', name: 'Ivysaur'},
-  // ]
   
   let classList = ['deck__bot'];
   if (cards.length) classList.push('deck--open');

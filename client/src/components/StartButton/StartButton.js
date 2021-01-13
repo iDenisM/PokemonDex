@@ -15,23 +15,21 @@ const Header = () => {
   const dispatchEvent = useDispatch();
 
   const [game, setGame] = useState({started: false})
-  if (game.started) {
-    dispatchEvent(doStartGame());
-  }
   
   const startGame = () => {
-    Engine.startGame();
-    dispatchEvent(addBots(Engine.botDraftCards));
-    if (Engine.gameStarted) {
+    if (updatedPlayerCards.length === 0) {
+      return showWarningOnScreen();
+    }
+    if (!Engine.gameStarted) {
+      Engine.startGame();
+    }
+    if (showGameBoard && Engine.gameStarted) {
+      setShowCloseWarning(true);
+    } else if (Engine.gameStarted) {
+      dispatchEvent(addBots(Engine.botDraftCards));
+      dispatchEvent(doStartGame());
       setShowGameBoard(true);
     }
-    // if (updatedPlayerCards.length === 0) {
-    //   showWarningOnScreen();
-    // } else if (!game.started && !game.isStarting) {
-    //   setTryStarGame(state => !state);
-    // } else if (game.started) {
-    //   setShowCloseWarning(true);
-    // }
   }
 
   const endGame = () => {
