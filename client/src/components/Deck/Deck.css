@@ -1,5 +1,5 @@
 .deck {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 63px);
   column-gap: 10px;
   padding: 10px;
   position: fixed;
@@ -7,6 +7,7 @@
   height: 83px;
   background-color: #928080f7;
   transition: transform 0.2s ease-in;
+  justify-content: center;
 }
 
 .deck--open {
