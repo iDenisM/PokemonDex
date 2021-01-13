@@ -20,18 +20,18 @@ export const useStartGame = (tryStartGame) => {
   const [data, setData] = useState({
     isStarting: false,
     botCards: [],
-    ready: false
+    started: false
   });
   
   useEffect(() => {
-    setData({ isStarting: true, botCards: [], ready: false });
+    setData({ isStarting: true, botCards: [], started: false });
 
     const fetchData = async () => {
       const cards = await workerApi.start();
       console.log('---Data Fetched');
-      setData({ isStarting: false, botCards: cards, ready: cards })
+      setData({ isStarting: false, botCards: cards, started: cards })
     };
-    
+
     fetchData();
   }, [workerApi, tryStartGame, setData]);
 

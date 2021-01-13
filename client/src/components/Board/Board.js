@@ -1,16 +1,13 @@
 import './Board.css';
 import { useState } from 'react';
-import Modal from '../Modal';
-import Button from '../Button';
 import PlayerDeck from '../PlayerDeck';
 import BotDeck from '../BotDeck';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleStartEndGame } from '../../actions'
 // import { reset, end } from '../../worker';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const triggeredToOpen = useSelector((state) => state.startEndGame);
+  const triggeredToOpen = useSelector((state) => state.gameState);
 
   const toggleBoard = () => {
     setIsOpened(!isOpened)

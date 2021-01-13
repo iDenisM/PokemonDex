@@ -16,8 +16,11 @@ export default class Engine {
 
   set startGame(start) {
     this._gameStarted = start
-    // DO THINGS IF GAME STARTED
-    // DO THINGS IF GAME ENDTED
+    if (start) {
+      // DO THINGS IF GAME STARTED
+    } else {
+      // DO THINGS IF GAME ENDTED
+    }
   }
 
   addCards(cards) {
@@ -33,6 +36,7 @@ export default class Engine {
   start() {
     console.log('----TRYING TO STAR GAME----');
     this.startGame = 
+      !this.startGame &&
       this.allCards?.length > 0 &&
       this._playerCards?.length > 0 && 
       this._botCards?.length > 0;
@@ -46,6 +50,7 @@ export default class Engine {
 
   end() {
     console.log('END GAME');
+    this.startGame = false;
   }
 
   _createCard(d) {

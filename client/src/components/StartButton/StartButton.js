@@ -3,40 +3,38 @@ import { useState } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
 import { useDispatch } from 'react-redux';
-import { toggleStartEndGame } from '../../actions'
+import { doStartGame, doEndGame } from '../../actions'
 import { useSelector } from 'react-redux';
 import { useStartGame, useAddPlayerCards } from "../../worker";
 
 const Header = () => {
   const [tryStartGame, setTryStarGame] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
-  const [showClose, setShowClose] = useState(false);
+  const [showNoCardsWarning, setShowNoCardsWarning] = useState(false);
+  const [showCloseWarning, setShowCloseWarning] = useState(false);
 
   const updatedPlayerCards = useSelector((state) => state.pokemonList);
   const dispatchEvent = useDispatch();
 
   useAddPlayerCards(updatedPlayerCards);
   const game = useStartGame(tryStartGame);
+  console.log('game state', game.started);
+  if (game.started) {
+    dispatchEvent(doStartGame());
+  }
 
   const startGame = () => {
     if (updatedPlayerCards.length === 0) {
       showWarningOnScreen();
     } else if (!game.started && !game.isStarting) {
       setTryStarGame(state => !state);
+    } else if (game.started) {
+      setShowCloseWarning(true);
     }
-    // if (playBoardIsVisible && start.ready) {
-    //   setShowClose(true);
-    // } else if (start.ready) {
-    //   setPlayBoardIsVisible(true);
-    //   // dispatchEvent(toggleStartEndGame());
-    // } else {
-    //   showWarningOnScreen();
-    // }
   }
 
   const endGame = () => {
     // end();
-    dispatchEvent(toggleStartEndGame());
+    dispatchEvent(doEndGame());
   }
 
   const resetGame = () => {
@@ -44,9 +42,9 @@ const Header = () => {
   }
   
   const showWarningOnScreen = () => {
-    setShowWarning(true);
+    setShowNoCardsWarning(true);
     setTimeout(() => {
-      setShowWarning(false);
+      setShowNoCardsWarning(false);
     }, 1500);
   }
 
@@ -59,10 +57,10 @@ const Header = () => {
           (<span className="text">Start Game</span>)
         }
       </Button>
-      <Modal show={showWarning} addClass={['modal__warr']}>
+      <Modal show={showNoCardsWarning} addClass={['modal__warr']}>
         <span className="modal__warr__text">Please select at least one pokemon</span>
       </Modal>
-      <Modal show={showClose} addClass={['modal__start']} onClose={endGame}>
+      <Modal show={showCloseWarning} addClass={['modal__start']} onClose={endGame}>
         <Button addClass={['modal__start__restart']} onClick={resetGame}>
           <span className="text">Restart Game</span>
         </Button>

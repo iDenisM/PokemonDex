@@ -1,7 +1,10 @@
 const gameReducer = (state = false, action) => {
   switch (action.type) {
-    case 'STARTENDGAME':
-      state = !state;
+    case 'STARTGAME':
+      state = true;
+      return state;
+    case 'ENDGAME':
+      state = false;
       return state;
     default:
       return state;
