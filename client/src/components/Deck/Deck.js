@@ -1,8 +1,6 @@
 import './Deck.css';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from '../Image';
-import Button from '../Button';
 import Card from '../Card';
 import { useDispatch } from 'react-redux';
 import { removePokemonFromList } from '../../actions';
