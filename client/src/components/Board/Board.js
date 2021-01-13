@@ -6,7 +6,7 @@ import PlayerDeck from '../PlayerDeck';
 import BotDeck from '../BotDeck';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleStartEndGame } from '../../actions'
-import { reset, end } from '../../worker';
+// import { reset, end } from '../../worker';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -14,12 +14,12 @@ const Board = () => {
   const dispatchEvent = useDispatch();
 
   const endGame = () => {
-    end();
+    // end();
     dispatchEvent(toggleStartEndGame());
   }
 
   const resetGame = () => {
-    reset();
+    // reset();
   }
 
   const toggleBoard = () => {

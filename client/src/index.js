@@ -24,11 +24,9 @@ let store = createStore(rootReducers);
 // ReactDOM.hydrate(
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <React.StrictMode> {/* Remove react strict mode at the end of the project */}
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </ApolloProvider>,
   document.getElementById('root')
 );

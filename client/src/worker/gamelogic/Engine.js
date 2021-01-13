@@ -14,9 +14,11 @@ export default class Engine {
   }
 
   start(playerCards) {
+    if (!playerCards || playerCards.length === 0) return [];
     console.log('START GAME');
     // Create Player Deck
     // this._createPlayerDeck(playerCards);
+    return playerCards;
   }
 
   reset() {
