@@ -34,3 +34,13 @@ export const addBots = (value) => ({
 export const removeBots = () => ({
   type: 'REMOVEINGBOTS'
 })
+
+export const playerPickedCard = (value) => ({
+  type: 'PLAYERPICK',
+  payload: value
+})
+
+export const playerTrun = (value) => ({
+  type: 'PLAYERTURN',
+  payload: value
+})

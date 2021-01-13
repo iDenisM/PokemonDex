@@ -1,9 +1,11 @@
+import { rewriteURIForGET } from "@apollo/client";
 
 class Engine {
   _gameStarted = false;
   _playerCards = [];
   _botCards = [];
   botDraftCards = [];
+  _currentTurn = false;
 
   constructor() {
     if (!Engine.instance) {
@@ -34,24 +36,76 @@ class Engine {
     }
   }
 
+  /**
+   * Start the game
+   */
   startGame() {
     this.gameStarted = true;
+    if (this.gameStarted) {
+      this.__clonePlayerCards = [...this._playerCards];
+    }
   }
 
+  /**
+   * End the game
+   */
   endGame() {
     this.gameStarted = false;
   }
 
+  /**
+   * Restart the current game
+   */
+  resetGame() {
+    this._playerCards = {...this.__clonePlayerCards};
+    this._botCards = {...this.__cloneBotCards};
+  }
+
+  /**
+   * Add the full list of available cards
+   * In this case every single card has a
+   * simpler api use other methods to get
+   * the full data of card
+   * @param {[object]} cards 
+   */
   addCards(cards) {
     this._allCards = cards;
   }
 
+  /**
+   * Updates the players deck list
+   * @param {[object]} cards 
+   */
   addPlayerCards(cards) {
     this._playerCards = cards;
   }
 
+  /**
+   * Adds to the bots deck a new card
+   * @param {object} card 
+   */
   addBotCard(card) {
     this._botCards.push(card);
+    this.__cloneBotCards.push(card);
+  }
+
+  /**
+   * Returns the updated card data of 
+   * the player by id
+   * @param {number} id 
+   */
+  getPlayerCardById(id) {
+    if (!id) return null;
+    return this._playerCards.find(c => c.id === id);
+  }
+
+  /**
+   * Return the whos the current turn
+   * If true then the turn is for player
+   */
+  getCurrentTurn() {
+    // Make a random function to start turn
+    return true;
   }
 
   _createDraftBotDeck() {

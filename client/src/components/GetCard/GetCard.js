@@ -9,7 +9,7 @@ const GetCard = ({id, name}) => {
   if (loading) return <div>...Loading</div>
   if (error) return <div>Something went wrong</div>
   const botCard = { ...data.pokemon };
-  console.log(botCard);
+
   return (
     <Card key={botCard.id} card={botCard} />
   )

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { doStartGame, doEndGame, addBots, removeBots } from '../../actions'
+import { doStartGame, doEndGame, addBots, removeBots, playerPickedCard, playerTrun } from '../../actions'
 import Engine from '../../Engine';
 
 const Header = () => {
@@ -13,8 +13,6 @@ const Header = () => {
 
   const updatedPlayerCards = useSelector((state) => state.pokemonList);
   const dispatchEvent = useDispatch();
-
-  const [game, setGame] = useState({started: false})
   
   const startGame = () => {
     if (updatedPlayerCards.length === 0) {
@@ -26,6 +24,7 @@ const Header = () => {
     if (showGameBoard && Engine.gameStarted) {
       setShowCloseWarning(true);
     } else if (Engine.gameStarted) {
+      dispatchEvent(playerTrun(Engine.getCurrentTurn()));
       dispatchEvent(addBots(Engine.botDraftCards));
       dispatchEvent(doStartGame());
       setShowGameBoard(true);
@@ -35,6 +34,7 @@ const Header = () => {
   const endGame = () => {
     Engine.endGame()
     dispatchEvent(removeBots());
+    dispatchEvent(playerPickedCard(null))
     dispatchEvent(doEndGame());
     setShowCloseWarning(false);
     setShowGameBoard(false);
@@ -55,7 +55,7 @@ const Header = () => {
     <>
       <Button addClass={['header__btn']} onClick={startGame} >
         {
-          game.started ? 
+          showGameBoard ? 
           (<span className="text">End Game</span>) :
           (<span className="text">Start Game</span>)
         }
