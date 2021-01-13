@@ -10,7 +10,7 @@ const BotDeck = () => {
   if (cards.length) classList.push('deck--open');
 
   return (
-    <Deck cards={cards} addClass={classList} hasRemoveBtn={false} />
+    <Deck cards={cards} addClass={classList} />
   )
 }
 
