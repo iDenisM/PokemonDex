@@ -3,7 +3,6 @@ import { useState } from 'react';
 import PlayerDeck from '../PlayerDeck';
 import BotDeck from '../BotDeck';
 import { useSelector, useDispatch } from 'react-redux';
-// import { reset, end } from '../../worker';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);

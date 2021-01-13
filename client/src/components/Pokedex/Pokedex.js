@@ -1,10 +1,10 @@
+import './Pokedex.css';
 import React from 'react';
 import Button from '../Button';
 import Image from '../Image';
 import { useQuery, gql } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPokemonClick } from '../../actions'
-import './Pokedex.css';
 
 const ALL_POKEMONS = (number) => {
   return gql`
@@ -24,6 +24,9 @@ const Pokedex = () => {
   const dispatchClick = useDispatch();
   const selectSearchProduct = (state) => state.textSearch;
   const textSearch = useSelector(selectSearchProduct);
+
+
+  /** START RENDERING **/
 
   if (loading) return <p>Loading...</p>
   if (error) return <h2>Whoops... somthing went wrong!</h2>

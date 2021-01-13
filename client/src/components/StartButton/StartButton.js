@@ -5,7 +5,6 @@ import Modal from '../Modal';
 import { useDispatch } from 'react-redux';
 import { doStartGame, doEndGame } from '../../actions'
 import { useSelector } from 'react-redux';
-import { useStartGame, useAddPlayerCards } from "../../worker";
 
 const Header = () => {
   const [tryStartGame, setTryStarGame] = useState(false);
@@ -15,9 +14,7 @@ const Header = () => {
   const updatedPlayerCards = useSelector((state) => state.pokemonList);
   const dispatchEvent = useDispatch();
 
-  useAddPlayerCards(updatedPlayerCards);
-  const game = useStartGame(tryStartGame);
-  console.log('game state', game.started);
+  const [game, setGame] = useState({started: false})
   if (game.started) {
     dispatchEvent(doStartGame());
   }

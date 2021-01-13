@@ -6,13 +6,27 @@ export const useAddPlayerCards = (playerCards) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const engine = await workerApi.engine;
       const cards = await workerApi.addPlayerCards(playerCards);
+      debugger
     };
     
     if (playerCards.length > 0) {
       fetchData();
     }
   }, [workerApi, playerCards]);
+}
+
+export const useAddCards = (allCards) => {
+  const { workerApi } = useWorker();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const cards = await workerApi.addCards(allCards);
+    };
+    
+    fetchData();
+  }, [workerApi, allCards]);
 }
 
 export const useStartGame = (tryStartGame) => {
@@ -38,6 +52,9 @@ export const useStartGame = (tryStartGame) => {
   return data;
 }
 
+/**
+ * NOT READY YET
+ */
 export const useEndGame = () => {
   const [data, setData] = useState({
     isStarting: false,

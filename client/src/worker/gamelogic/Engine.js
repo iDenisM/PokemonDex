@@ -1,6 +1,6 @@
 import Card from './Card';
 
-export default class Engine {
+class Engine {
   _gameStarted = false;
   allCards = [];
   _botCards = [];
@@ -8,6 +8,14 @@ export default class Engine {
 
   constructor() {
     console.log('ENGINE LOADED');
+    this._addPlayerCards = this._addPlayerCards;
+    if (!Engine.instance) {
+      debugger
+      Engine.instance = this;
+    }
+
+
+    return Engine.instance
   }
 
   get startGame() {
@@ -23,18 +31,32 @@ export default class Engine {
     }
   }
 
-  addCards(cards) {
-    this.allCards = cards;
+  get playerCards() {
+    return this._playerCards;
   }
 
-  addPlayerCards(playerCards) {
-    this._playerCards = playerCards && playerCards.length > 0 ? playerCards : [];
+  set playerCards(cards) {
+    this._playerCards = cards && cards.length > 0 ? cards : [];;
+  }
+
+  _addPlayerCards(playerCards) {
+    console.log('---TRYING ADD PLAYER CARDS---');
+    this.playerCards = playerCards;
+    console.log('---ADDED PLAYER CARDS---', this.playerCards);
     // Create Player Deck
     // this._createPlayerDeck(playerCards);
   }
 
+  getPlayerCards() {
+    console.log('asdfasdf');
+  }
+
   start() {
     console.log('----TRYING TO STAR GAME----');
+    console.log('game started', !this.startGame);
+    console.log('all cards', this.allCards?.length);
+    console.log('player cards', this._playerCards);
+    console.log('bot cards', this._botCards?.length);
     this.startGame = 
       !this.startGame &&
       this.allCards?.length > 0 &&
@@ -101,3 +123,6 @@ export default class Engine {
     return this.allCards.find(c => c.maxCP < pCard.maxCP * 1.2 && c.maxCP > pCard.maxCP * 0.8 && c.id != card.id);
   }
 }
+
+const engine = new Engine();
+export default engine;
