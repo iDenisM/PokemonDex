@@ -62,3 +62,19 @@
   color: #dadada;
   padding: 0 5px;
 }
+
+.board__card__health {
+  position: absolute;
+}
+
+.board__card__health .text {
+  font-weight: 700;
+}
+
+.board__card--player .board__card__health {
+  bottom: -20px;
+}
+
+.board__card--bot .board__card__health {
+  top: -20px;
+}

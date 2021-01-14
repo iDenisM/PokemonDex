@@ -26,7 +26,7 @@ const BoardCard = ({ card, children, addClass, attack1Click, attack2Click}) => {
         { children }
         {
           HP && (
-            <div className="board__card__health">{HP}</div>
+            <div className="board__card__health">Health: <span className="text">{HP}</span></div>
           )
         }
       </div>
