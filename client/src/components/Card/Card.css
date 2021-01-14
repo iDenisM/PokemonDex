@@ -36,3 +36,13 @@
 .card__close--hide .card__close {
   display: none;
 }
+
+.card.dead::after {
+  content: '\274C';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 120px;
+}

@@ -52,14 +52,17 @@ const Board = () => {
 
   const playerFastAttack = () => {
     // if (!isPlayersCurrentTurn) return false;
-    Engine.doAttack('fast', playerCard, botCard);
-    Engine.botDoAttack(botCard, playerCard);
-    setIsPlayersCurrentTurn(state => !state);
+    concludeAttack('fast')
   }
   
   const playerSpecialAttack = () => {
     // if (!isPlayersCurrentTurn) return false;
-    Engine.doAttack('special', playerCard, botCard);
+    concludeAttack('special')
+  }
+
+  const concludeAttack = (type) => {
+    if (playerCard.isDead) return false;
+    Engine.doAttack(type, playerCard, botCard);
     Engine.botDoAttack(botCard, playerCard);
     setIsPlayersCurrentTurn(state => !state);
   }

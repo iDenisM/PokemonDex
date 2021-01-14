@@ -5,10 +5,13 @@ import Image from '../Image';
 import Button from '../Button';
 
 const Card = ({ card, addClass, onCloseClick, onClick }) => {
-  const { image, name } = card;
+  const { image, name, HP } = card;
+
+  const classList = [...addClass];
+  if (HP < 0) classList.push('dead');
   
   return (
-    <div className={['card', ...addClass].join(' ')} onClick={onClick}>
+    <div className={['card', classList].join(' ')} onClick={onClick}>
       <Image addClass={['card__img']} src={image} alt={name} width={20} height={20} />
       <Button addClass={['card__close']} onClick={onCloseClick} >
         <span className="ico"></span>
