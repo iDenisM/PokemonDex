@@ -5,8 +5,9 @@ import BotDeck from '../BotDeck';
 import Engine from '../../Engine';
 import BoardCard from '../BoardCard/BoardCard';
 import Card from '../Card';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CloseGameModal from '../CloseGameModal/CloseGameModal';
+import { restPokemonList } from '../../actions';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -14,6 +15,7 @@ const Board = () => {
   const [isPlayersCurrentTurn, setIsPlayersCurrentTurn] = useState(true);
   const gameStarted = useSelector((state) => state.gameStarted);
   const playerAction = useSelector((state) => state.playerAction);
+  const dispatchEvent = useDispatch();
   
   const playerCard = Engine.getPlayerCardById(playerAction.pickedCardId);
   const botCard = Engine.getBotCard(playerCard);
@@ -23,6 +25,7 @@ const Board = () => {
   }
   if (!gameStarted && Engine.gameStarted) {
     Engine.endGame();
+    dispatchEvent(restPokemonList());
   }
 
   if (Engine.gameFinished && !showCloseGameModal && Engine.gameStarted) {

@@ -15,7 +15,10 @@ const pokemonListReducer = (state = [], action) => {
         state.splice(removeIndex, 1);
       }
       state = [...state];
-      return state;      
+      return state;    
+    case 'RESETECARDS':
+      state = [];
+      return state;
     default:
       return state;
   }

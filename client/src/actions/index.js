@@ -18,6 +18,10 @@ export const removePokemonFromList = (value) => ({
   payload: value
 })
 
+export const restPokemonList = () => ({
+  type: 'RESETECARDS'
+})
+
 export const doStartGame = () => ({
   type: 'STARTGAME'
 })
