@@ -5,13 +5,13 @@ import BotDeck from '../BotDeck';
 import Engine from '../../Engine';
 import BoardCard from '../BoardCard/BoardCard';
 import Card from '../Card';
-import { useSelector, useDispatch } from 'react-redux';
-import { askedToEndGame } from '../../actions'
+import { useSelector } from 'react-redux';
 import CloseGameModal from '../CloseGameModal/CloseGameModal';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [showCloseGameModal, setShowCloseGameModal] = useState(false);
+  const [isPlayersCurrentTurn, setIsPlayersCurrentTurn] = useState(true);
   const gameStarted = useSelector((state) => state.gameStarted);
   const playerAction = useSelector((state) => state.playerAction);
   
@@ -36,12 +36,22 @@ const Board = () => {
   if (!gameStarted && isOpened) toggleBoard();
   if (isOpened) boardClassList.push('board--open');
 
-  const playerAttack1 = () => {
-    console.log(playerCard.attacks.fast.damage);
+  if (!isPlayersCurrentTurn) {
+    // bot attacks
   }
 
-  const playerAttack2 = () => {
-    console.log(playerCard.attacks.special.damage);
+  const playerFastAttack = () => {
+    // if (!isPlayersCurrentTurn) return false;
+    Engine.doAttack('fast', playerCard, botCard);
+    Engine.botDoAttack(botCard, playerCard);
+    setIsPlayersCurrentTurn(state => !state);
+  }
+  
+  const playerSpecialAttack = () => {
+    // if (!isPlayersCurrentTurn) return false;
+    Engine.doAttack('special', playerCard, botCard);
+    Engine.botDoAttack(botCard, playerCard);
+    setIsPlayersCurrentTurn(state => !state);
   }
 
   if (playerAction.playerTurn) {
@@ -67,8 +77,8 @@ const Board = () => {
           card={playerCard}
           addClass={['board__card--player']} 
           hasLockButton={true} 
-          attack1Click={playerAttack1}
-          attack2Click={playerAttack2}>
+          attack1Click={playerFastAttack}
+          attack2Click={playerSpecialAttack}>
           {
             playerCard && (
               <Card card={playerCard} />

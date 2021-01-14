@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
 import { useDispatch } from 'react-redux';
-import { doStartGame, addBots } from '../../actions'
+import { doStartGame } from '../../actions'
 import Engine from '../../Engine';
 import CloseGameModal from '../CloseGameModal/CloseGameModal';
 

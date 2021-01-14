@@ -170,8 +170,7 @@ class Engine {
    * @param {number} id 
    */
   getPlayerCardById(id) {
-    console.log(id);
-    if (!id) return null;
+    if (this.gameFinished || !id) return null;
     this.gameFinished = this._checkGameFinished(this.payerCards);
     if (this.gameFinished) this.winner = 'Computer';
     return this.payerCards.find(c => c.id === id);
@@ -182,6 +181,7 @@ class Engine {
    * @param {object} playerCard 
    */
   getBotCard(playerCard) {
+    if (this.gameFinished) return null;
     this.gameFinished = this._checkGameFinished(this.botCards);
     if (this.gameFinished) this.winner = 'Player';
     if (!playerCard) return null;
@@ -192,22 +192,35 @@ class Engine {
     return cardToPlay;
   }
 
-  doAttack(card1, card2) {
-
+  /**
+   * Does damage to the defending card
+   * @param {string} attckType fast | special
+   * @param {object} attackingCard 
+   * @param {object} defendingCard 
+   */
+  doAttack(attckType, attackingCard, defendingCard) {
+    defendingCard.HP -= 
+      attckType === 'fast' ? 
+      attackingCard.attacks.fast.damage : 
+      attackingCard.attacks.special.damage;
   }
 
-  _checkGameFinished(cards) {
-    if (cards.length === 0) return false;
-    return !cards.find(card => card.HP > 0);
+  botDoAttack(attackingCard, defendingCard) {
+    const botAttacks = attackingCard.attacks;
+    const attackType = 
+      botAttacks.fast > botAttacks.special ? 
+      botAttacks.fast : 
+      botAttacks.special;
+    defendingCard.HP -= attackType.damage;
   }
 
   /**
-   * Return the whos the current turn
-   * If true then the turn is for player
+   * Makes a check if the game is finished
+   * @param {object} cards 
    */
-  getCurrentTurn() {
-    // Make a random function to start turn
-    return true;
+  _checkGameFinished(cards) {
+    if (cards.length === 0) return false;
+    return !cards.find(card => card.HP > 0);
   }
 
   /**
