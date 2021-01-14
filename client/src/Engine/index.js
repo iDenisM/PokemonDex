@@ -62,7 +62,6 @@ class Engine {
    */
   startGame() {
     this.gameStarted = true;
-    this._resetValues();
     if (this.gameStarted) {
       this.__clonePlayerCards = [...this.payerCards];
     }
@@ -72,8 +71,8 @@ class Engine {
    * End the game
    */
   endGame() {
-    this.gameStarted = false;
     this._resetValues();
+    this.gameStarted = false;
   }
   
   /**
@@ -87,8 +86,8 @@ class Engine {
 
   _resetValues() {
     this.gameFinished = false;
-    console.log(this.gameFinished);
     this.winner = null;
+    this.payerCards = []
   }
 
   /**
@@ -111,7 +110,8 @@ class Engine {
    * @param {object} attacks 
    */
   addPlayerCard(card, attacks) {
-    if (card && attacks.fast && attacks.special) {
+    if (!attacks) return false;
+    if (card &&  attacks.fast && attacks.special) {
       const playerCard = new Card(card, attacks);
       this.payerCards.push(playerCard);
     }

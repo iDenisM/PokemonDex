@@ -24,12 +24,18 @@
 
 @media (min-width: 768px) {
   .pokemons {
-    --pk-grid-template: 1fr 1fr 1fr;
+    --pk-grid-template: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1025px) {
   .pokemons {
-    --pk-grid-template: 1fr 1fr 1fr 1fr;
+    --pk-grid-template: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1550px) {
+  .pokemons {
+    --pk-grid-template: repeat(5, 1fr);
   }
 }
