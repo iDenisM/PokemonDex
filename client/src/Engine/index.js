@@ -110,7 +110,7 @@ class Engine {
    * @param {object} attacks 
    */
   addPlayerCard(card, attacks) {
-    if (!attacks) return false;
+    if (!attacks) return false
     if (card &&  attacks.fast && attacks.special) {
       const playerCard = new Card(card, attacks);
       this.payerCards.push(playerCard);
