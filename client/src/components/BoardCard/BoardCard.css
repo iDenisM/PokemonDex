@@ -53,6 +53,7 @@
 
 .board__card--bot .board__card__attack {
   align-self: flex-start;
+  word-break: break-word;
 }
 
 .board__card__name {

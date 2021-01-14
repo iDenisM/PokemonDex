@@ -7,7 +7,8 @@ const gameReducer = (state = false, action) => {
       state = false;
       return state;
     case 'ASKENDGAME':
-      return true;
+      state = {gameEnded: true}
+      return state;
     default:
       return state;
   }

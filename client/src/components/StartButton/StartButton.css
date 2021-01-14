@@ -30,9 +30,20 @@
   transform: translate(-50%, -50%);
 }
 
+.modal__start.winner .modal__content {
+  flex-wrap: wrap;
+  height: 110px;
+}
+
 .modal__start__restart,
 .modal__start__close {
   width: 30%;
   height: 50%;
   margin: 0 20px;
 }
+
+.winner {
+  padding-top: 10px;
+}
+
+

@@ -44,3 +44,8 @@ export const playerTrun = (value) => ({
   type: 'PLAYERTURN',
   payload: value
 })
+
+export const askedToEndGame = (value) => ({
+  type: 'ASKENDGAME',
+  payload: value
+})

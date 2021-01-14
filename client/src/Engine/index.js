@@ -5,9 +5,10 @@ const maxThreshold = 1.2;
 
 class Engine {
   botDraftCards = [];
+  winner = null;
+  payerCards = [];
+  botCards = [];
   _gameStarted = false;
-  _playerCards = [];
-  _botCards = [];
   _currentTurn = false;
   _gameFinished = false;
   __cloneBotCards = [];
@@ -40,7 +41,7 @@ class Engine {
       this._gameStarted = 
         !this.gameStarted &&
         this._allCards?.length > 0 &&
-        this._playerCards?.length > 0 &&
+        this.payerCards?.length > 0 &&
         this.botDraftCards?.length > 0
     } else {
       this._gameStarted = false;
@@ -55,14 +56,15 @@ class Engine {
   set gameFinished(value) {
     this._gameFinished = value;
   }
+
   /**
    * Start the game
    */
   startGame() {
     this.gameStarted = true;
-    this.gameFinished = false;
+    this._resetValues();
     if (this.gameStarted) {
-      this.__clonePlayerCards = [...this._playerCards];
+      this.__clonePlayerCards = [...this.payerCards];
     }
   }
 
@@ -71,16 +73,21 @@ class Engine {
    */
   endGame() {
     this.gameStarted = false;
-    this.gameFinished = false;
+    this._resetValues();
   }
   
   /**
    * Restart the current game
    */
   resetGame() {
+    this._resetValues();
+    this.payerCards = {...this.__clonePlayerCards};
+    this.botCards = {...this.__cloneBotCards};
+  }
+
+  _resetValues() {
     this.gameFinished = false;
-    this._playerCards = {...this.__clonePlayerCards};
-    this._botCards = {...this.__cloneBotCards};
+    this.winner = null;
   }
 
   /**
@@ -105,7 +112,7 @@ class Engine {
   addPlayerCard(card, attacks) {
     if (card && attacks.fast && attacks.special) {
       const playerCard = new Card(card, attacks);
-      this._playerCards.push(playerCard);
+      this.payerCards.push(playerCard);
     }
   }
 
@@ -114,8 +121,8 @@ class Engine {
    * @param {number} cardId 
    */
   removePlayerCard(cardId) {
-    const index = this._playerCards.findIndex(c => c.id === cardId);
-    if (index !== -1) this._playerCards.splice(index, 1);
+    const index = this.payerCards.findIndex(c => c.id === cardId);
+    if (index !== -1) this.payerCards.splice(index, 1);
   }
 
   /**
@@ -124,12 +131,12 @@ class Engine {
    */
   addBotCard(card) {
     if (!card) return false;
-    const index = this._botCards.findIndex(c => c.id === card.id);
-    if (index !== -1) return this._botCards[index];
+    const index = this.botCards.findIndex(c => c.id === card.id);
+    if (index !== -1) return this.botCards[index];
     const attacks = this._getBotAttacks(card);
     const botCard = new Card(card, attacks);
     botCard.HP = 0;
-    this._botCards.push(botCard);
+    this.botCards.push(botCard);
     this.__cloneBotCards.push(botCard);
   }
 
@@ -163,9 +170,11 @@ class Engine {
    * @param {number} id 
    */
   getPlayerCardById(id) {
+    console.log(id);
     if (!id) return null;
-    this.gameFinished = this._checkGameFinished(this._playerCards);
-    return this._playerCards.find(c => c.id === id);
+    this.gameFinished = this._checkGameFinished(this.payerCards);
+    if (this.gameFinished) this.winner = 'Computer';
+    return this.payerCards.find(c => c.id === id);
   }
 
   /**
@@ -173,12 +182,12 @@ class Engine {
    * @param {object} playerCard 
    */
   getBotCard(playerCard) {
-    this.gameFinished = this._checkGameFinished(this._botCards);
+    this.gameFinished = this._checkGameFinished(this.botCards);
+    if (this.gameFinished) this.winner = 'Player';
     if (!playerCard) return null;
-    if (this._botCards.length === 1) return this._botCards[0];
-    let cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP && !c.isDead);
+    let cardToPlay = this.botCards.find(c => c.maxCP >= playerCard.maxCP && !c.isDead);
     if (!cardToPlay) {
-      cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP * minThreshold && !c.isDead);
+      cardToPlay = this.botCards.find(c => c.maxCP >= playerCard.maxCP * minThreshold && !c.isDead);
     }
     return cardToPlay;
   }
@@ -189,7 +198,7 @@ class Engine {
 
   _checkGameFinished(cards) {
     if (cards.length === 0) return false;
-    return !!cards.find(card => card.HP > 0);
+    return !cards.find(card => card.HP > 0);
   }
 
   /**
@@ -210,14 +219,14 @@ class Engine {
     let draftBots = [];
 
     const findFn = (currentCard, playerCard) => {
-      const a = !this._playerCards.find(b => b.id === currentCard.id)  
+      const a = !this.payerCards.find(b => b.id === currentCard.id)  
       const b = !draftBots.find(b => b.id === currentCard.id)
       const c = currentCard.maxCP > playerCard.maxCP * minThreshold;
       const d = currentCard.maxCP < playerCard.maxCP * maxThreshold;
 
       return a && b && c && d;
     }
-    for (const card of this._playerCards) {
+    for (const card of this.payerCards) {
       const bot = this._allCards.find(c => findFn(c, card))
       if (bot) draftBots.push(bot);
     }
