@@ -190,12 +190,7 @@ class Engine {
     const hasCards = this.botCards.find(c => c.isDead !== true);
     let cardToPlay = this.botCards.find(c => c.maxCP >= playerCard.maxCP && !c.isDead);
     if (!cardToPlay && hasCards) {
-      cardToPlay = this.botCards.find(c => c.maxCP >= playerCard.maxCP * minThreshold && !c.isDead);
-      let delta = 0.8;
-      while (!cardToPlay) {
-        cardToPlay = this.botCards.find(c => c.maxCP >= minThreshold * delta && !c.isDead);
-        delta *= 0.8;
-      }
+      cardToPlay = this.botCards.find(c => !c.isDead);
     }
     return cardToPlay;
   }

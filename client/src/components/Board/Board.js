@@ -25,7 +25,9 @@ const Board = () => {
   }
   if (!gameStarted && Engine.gameStarted) {
     Engine.endGame();
-    dispatchEvent(restPokemonList());
+    setTimeout(() => {
+      dispatchEvent(restPokemonList());
+    }, 500);
   }
 
   if (Engine.gameFinished && !showCloseGameModal && Engine.gameStarted) {
