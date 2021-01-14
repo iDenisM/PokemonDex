@@ -87,6 +87,7 @@ class Engine {
 
   _resetValues() {
     this.gameFinished = false;
+    console.log(this.gameFinished);
     this.winner = null;
   }
 
@@ -135,7 +136,6 @@ class Engine {
     if (index !== -1) return this.botCards[index];
     const attacks = this._getBotAttacks(card);
     const botCard = new Card(card, attacks);
-    botCard.HP = 0;
     this.botCards.push(botCard);
     this.__cloneBotCards.push(botCard);
   }

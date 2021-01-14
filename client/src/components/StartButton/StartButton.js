@@ -10,7 +10,6 @@ import CloseGameModal from '../CloseGameModal/CloseGameModal';
 const Header = () => {
   const [showCloseGameModal, setShowCloseGameModal] = useState(false);
   const [showNoCardsWarning, setShowNoCardsWarning] = useState(false);
-  const [showBoard, setShowBoard] = useState(false);
   const dispatchEvent = useDispatch();
 
   const toggleStartEndGame = () => {
@@ -35,8 +34,6 @@ const Header = () => {
       setShowNoCardsWarning(false);
     }, 1500);
   }
-
-  console.log(showCloseGameModal);
 
   return (
     <>

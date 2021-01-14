@@ -7,19 +7,27 @@ import BoardCard from '../BoardCard/BoardCard';
 import Card from '../Card';
 import { useSelector, useDispatch } from 'react-redux';
 import { askedToEndGame } from '../../actions'
+import CloseGameModal from '../CloseGameModal/CloseGameModal';
 
 const Board = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const [showCloseGameModal, setShowCloseGameModal] = useState(false);
   const gameStarted = useSelector((state) => state.gameStarted);
   const playerAction = useSelector((state) => state.playerAction);
-  
-  console.log('---GAME STARTED---', gameStarted);
   
   const playerCard = Engine.getPlayerCardById(playerAction.pickedCardId);
   const botCard = Engine.getBotCard(playerCard);
 
+  if (Engine.gameFinished && !showCloseGameModal && Engine.gameStarted) {
+    setShowCloseGameModal(true);
+  }
+
   const toggleBoard = () => {
     setIsOpened(!isOpened)
+  }
+
+  const hideCloseGameModal = () => {
+    setShowCloseGameModal(false);
   }
 
   let boardClassList = ['board'];
@@ -69,6 +77,7 @@ const Board = () => {
         </BoardCard>
       </div>
       <PlayerDeck />
+      <CloseGameModal show={showCloseGameModal} onClose={hideCloseGameModal} />
     </>
   )
 }

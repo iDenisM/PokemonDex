@@ -12,10 +12,11 @@ const CloseGameModal = ({ show, onClose }) => {
 
   const endGame = () => {
     Engine.endGame()
+    Engine.gameFinished = false;
+    onClose();
     dispatchEvent(removeBots());
     dispatchEvent(playerPickedCard(null));
     dispatchEvent(doEndGame());
-    onClose();
   }
 
   const resetGame = () => {
