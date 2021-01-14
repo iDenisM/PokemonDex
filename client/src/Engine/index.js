@@ -8,8 +8,9 @@ class Engine {
   _gameStarted = false;
   _playerCards = [];
   _botCards = [];
-  __cloneBotCards = [];
   _currentTurn = false;
+  _gameFinished = false;
+  __cloneBotCards = [];
 
   constructor() {
     if (!Engine.instance) {
@@ -47,11 +48,19 @@ class Engine {
     }
   }
 
+  get gameFinished() {
+    return this._gameFinished;
+  }
+
+  set gameFinished(value) {
+    this._gameFinished = value;
+  }
   /**
    * Start the game
    */
   startGame() {
     this.gameStarted = true;
+    this.gameFinished = false;
     if (this.gameStarted) {
       this.__clonePlayerCards = [...this._playerCards];
     }
@@ -62,12 +71,14 @@ class Engine {
    */
   endGame() {
     this.gameStarted = false;
+    this.gameFinished = false;
   }
-
+  
   /**
    * Restart the current game
    */
   resetGame() {
+    this.gameFinished = false;
     this._playerCards = {...this.__clonePlayerCards};
     this._botCards = {...this.__cloneBotCards};
   }
@@ -114,9 +125,10 @@ class Engine {
   addBotCard(card) {
     if (!card) return false;
     const index = this._botCards.findIndex(c => c.id === card.id);
-    if (index != -1) return this._botCards[index];
+    if (index !== -1) return this._botCards[index];
     const attacks = this._getBotAttacks(card);
     const botCard = new Card(card, attacks);
+    botCard.HP = 0;
     this._botCards.push(botCard);
     this.__cloneBotCards.push(botCard);
   }
@@ -152,6 +164,7 @@ class Engine {
    */
   getPlayerCardById(id) {
     if (!id) return null;
+    this.gameFinished = this._checkGameFinished(this._playerCards);
     return this._playerCards.find(c => c.id === id);
   }
 
@@ -160,13 +173,23 @@ class Engine {
    * @param {object} playerCard 
    */
   getBotCard(playerCard) {
+    this.gameFinished = this._checkGameFinished(this._botCards);
     if (!playerCard) return null;
     if (this._botCards.length === 1) return this._botCards[0];
-    let cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP);
+    let cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP && !c.isDead);
     if (!cardToPlay) {
-      cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP * minThreshold);
+      cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP * minThreshold && !c.isDead);
     }
     return cardToPlay;
+  }
+
+  doAttack(card1, card2) {
+
+  }
+
+  _checkGameFinished(cards) {
+    if (cards.length === 0) return false;
+    return !!cards.find(card => card.HP > 0);
   }
 
   /**

@@ -4,7 +4,7 @@ import selectorReducer from './select';
 import pokemonListReducer from './pokemonList';
 import gameReducer from './game';
 import botPokemonListReduce from './botPokemonList';
-import playerActions from './playerActions'
+import playerActions from './playerActions';
 
 const rootReducers = combineReducers({
   textSearch: searcherReducer,

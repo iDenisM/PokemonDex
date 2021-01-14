@@ -10,10 +10,15 @@ const Header = () => {
   const [showGameBoard, setShowGameBoard] = useState(false);
   const [showNoCardsWarning, setShowNoCardsWarning] = useState(false);
   const [showCloseWarning, setShowCloseWarning] = useState(false);
-
-  const updatedPlayerCards = useSelector((state) => state.pokemonList);
   const dispatchEvent = useDispatch();
   
+  const updatedPlayerCards = useSelector((state) => state.pokemonList);
+
+  console.log(Engine.gameFinished);
+  if (Engine.gameFinished) {
+    setShowCloseWarning(true);
+  }
+
   const startGame = () => {
     if (updatedPlayerCards.length === 0) {
       return showWarningOnScreen();
@@ -34,7 +39,7 @@ const Header = () => {
   const endGame = () => {
     Engine.endGame()
     dispatchEvent(removeBots());
-    dispatchEvent(playerPickedCard(null))
+    dispatchEvent(playerPickedCard(null));
     dispatchEvent(doEndGame());
     setShowCloseWarning(false);
     setShowGameBoard(false);
@@ -55,7 +60,7 @@ const Header = () => {
     <>
       <Button addClass={['header__btn']} onClick={startGame} >
         {
-          showGameBoard ? 
+          Engine.gameStarted ? 
           (<span className="text">End Game</span>) :
           (<span className="text">Start Game</span>)
         }
@@ -64,6 +69,11 @@ const Header = () => {
         <span className="modal__warr__text">Please select at least one pokemon</span>
       </Modal>
       <Modal show={showCloseWarning} addClass={['modal__start']} onClose={endGame}>
+        {
+          (Engine.gameFinished && showCloseWarning) && (
+            <span className="winner">And the winner is {`${Engine.winner}`}</span>
+          )
+        }
         <Button addClass={['modal__start__restart']} onClick={resetGame}>
           <span className="text">Restart Game</span>
         </Button>
