@@ -73,14 +73,6 @@ class Engine {
   }
 
   /**
-   * Updates the players deck list
-   * @param {[object]} cards 
-   */
-  addPlayerCards(cards) {
-    this._playerCards = cards;
-  }
-
-  /**
    * Create card for player and add to 
    * players deck
    * Attcks is object of fast and special

@@ -7,6 +7,7 @@ export default class Card {
       fast: attacks?.fast,
       special: attacks?.special
     }
+    this.maxCP = data.maxCP;
   }
 
   get isDead() {
