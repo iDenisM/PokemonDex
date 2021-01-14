@@ -1,0 +1,52 @@
+.board__card {
+  --card-w-h: 180px;
+  width: 100%;
+  height: var(--card-w-h);
+  display: flex;
+  justify-content: center;
+}
+
+.board__card .card {
+  border: 0;
+}
+
+.board__card .card__close {
+  display: none;
+}
+
+.board__card__holder {
+  border: 2px solid #a0a0a0;
+  width: var(--card-w-h);
+  height: var(--card-w-h);
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.board__card--bot,
+.board__card--player {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.2s ease-in;
+}
+
+.board__card--bot {
+  align-self: end;
+}
+
+.board__card--bot.attack {
+  transform: translate3d(0, 100px, 0);
+}
+
+.board__card--player.attack {
+  transform: translate3d(0, -100px, 0);
+}
+
+.board__card__attack {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  align-self: flex-end;
+}
+
+.board__card--bot .board__card__attack {
+  align-self: flex-start;
+}

@@ -3,6 +3,7 @@ export default class Card {
     this.id = data.id;
     this.name = data.name;
     this.HP = data.maxHP;
+    this.image = data.image;
     this.attacks = {
       fast: attacks?.fast,
       special: attacks?.special
