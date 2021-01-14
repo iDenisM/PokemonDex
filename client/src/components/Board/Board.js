@@ -27,7 +27,7 @@ const Board = () => {
     Engine.endGame();
     setTimeout(() => {
       dispatchEvent(restPokemonList());
-    }, 500);
+    }, 1000);
   }
 
   if (Engine.gameFinished && !showCloseGameModal && Engine.gameStarted) {
