@@ -17,7 +17,7 @@ const PlayerDeck = () => {
   const cardClicked = (id) => {
     if (gameStarted && playerAction.playerTurn) {
       dispatchPick(playerPickedCard(id))
-      dispatchPick(playerTrun(false))
+      // dispatchPick(playerTrun(false))
     }
   }
   

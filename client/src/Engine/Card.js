@@ -3,12 +3,12 @@ export default class Card {
     this.id = data.id;
     this.name = data.name;
     this.HP = data.maxHP;
+    this.maxCP = data.maxCP;
     this.image = data.image;
     this.attacks = {
       fast: attacks?.fast,
       special: attacks?.special
     }
-    this.maxCP = data.maxCP;
   }
 
   get isDead() {

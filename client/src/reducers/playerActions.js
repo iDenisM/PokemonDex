@@ -1,11 +1,11 @@
 const stateDef = {
-  pickedCardId: null
+  pickedCardId: null,
+  playerTurn: true
 }
 
 const playerActions = (state = stateDef, action) => {
   switch (action.type) {
     case 'PLAYERPICK':
-      console.log(action.payload);
       state = { ...state, pickedCardId: action.payload }
       return state;
     case 'PLAYERTURN':

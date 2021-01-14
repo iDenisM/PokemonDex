@@ -1,10 +1,14 @@
 import Card from './Card';
 
+const minThreshold = 0.8;
+const maxThreshold = 1.2;
+
 class Engine {
+  botDraftCards = [];
   _gameStarted = false;
   _playerCards = [];
   _botCards = [];
-  botDraftCards = [];
+  __cloneBotCards = [];
   _currentTurn = false;
 
   constructor() {
@@ -31,7 +35,6 @@ class Engine {
         this.botDraftCards?.length > 0
     } else {
       this._gameStarted = false;
-      this._playerCards = [];
       this.botDraftCards = [];
     }
   }
@@ -101,6 +104,9 @@ class Engine {
    * @param {object} card 
    */
   addBotCard(card) {
+    if (!card) return false;
+    const index = this._botCards.findIndex(c => c.id === card.id);
+    if (index != -1) return this._botCards[index];
     const attacks = this._getBotAttacks(card);
     const botCard = new Card(card, attacks);
     this._botCards.push(botCard);
@@ -119,10 +125,16 @@ class Engine {
 
   /**
    * Returns best attack from list
-   * @param {array} attack 
+   * @param {array} attacks 
    */
-  _getBestAttck(attack) {
-
+  _getBestAttck(attacks) {
+    let bestAttack = {damage: 0};
+    for (const attack of attacks) {
+      if (attack.damage > bestAttack.damage) {
+        bestAttack = attack
+      }
+    }
+    return bestAttack;
   }
 
   /**
@@ -136,6 +148,19 @@ class Engine {
   }
 
   /**
+   * Returns the best bot card from player pick
+   * @param {object} playerCard 
+   */
+  getBotCard(playerCard) {
+    if (!playerCard) return null;
+    let cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP);
+    if (!cardToPlay) {
+      cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP * minThreshold);
+    }
+    return cardToPlay;
+  }
+
+  /**
    * Return the whos the current turn
    * If true then the turn is for player
    */
@@ -145,8 +170,6 @@ class Engine {
   }
 
   _createDraftBotDeck() {
-    const minThreshold = 0.8;
-    const maxThreshold = 1.2;
     let draftBots = [];
 
     const findFn = (currentCard, playerCard) => {

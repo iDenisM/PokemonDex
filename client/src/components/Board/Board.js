@@ -12,7 +12,7 @@ const Board = () => {
   const gameStarted = useSelector((state) => state.gameStarted);
   const playerAction = useSelector((state) => state.playerAction);
   const playerCard = Engine.getPlayerCardById(playerAction.pickedCardId);
-  const botCard = Engine.getPlayerCardById(playerAction.pickedCardId);
+  const botCard = Engine.getBotCard(playerCard);
 
   const toggleBoard = () => {
     setIsOpened(!isOpened)
@@ -30,6 +30,12 @@ const Board = () => {
 
   const playerAttack2 = () => {
     console.log(playerCard.attacks.special.damage);
+  }
+
+  if (playerAction.playerTurn) {
+    if (playerAction.pickedCardId) Engine.getBotCard(playerCard)
+  } else {
+
   }
 
   return (
