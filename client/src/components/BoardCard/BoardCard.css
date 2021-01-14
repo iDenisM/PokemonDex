@@ -45,8 +45,20 @@
   height: 70px;
   border-radius: 50%;
   align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .board__card--bot .board__card__attack {
   align-self: flex-start;
+}
+
+.board__card__name {
+  position: absolute;
+  background-color: #272727;
+  bottom: 0;
+  color: #dadada;
+  padding: 0 5px;
 }

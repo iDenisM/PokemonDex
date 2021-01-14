@@ -36,7 +36,9 @@ const Board = () => {
     <>
       <BotDeck />
       <div className={boardClassList.join(' ')}>
-        <BoardCard addClass={['board__card--bot']}>
+        <BoardCard 
+          card={botCard}
+          addClass={['board__card--bot']}>
           {
             botCard && (
               <Card card={botCard} />
@@ -44,6 +46,7 @@ const Board = () => {
           }
         </BoardCard>
         <BoardCard 
+          card={playerCard}
           addClass={['board__card--player']} 
           hasLockButton={true} 
           attack1Click={playerAttack1}

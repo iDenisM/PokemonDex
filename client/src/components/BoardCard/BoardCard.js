@@ -3,7 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
-const BoardCard = ({ children, addClass, attacks, attack1Click, attack2Click}) => {
+const BoardCard = ({ card, children, addClass, attack1Click, attack2Click}) => {
+  const { name, attacks, HP } = card || {name: null, attacks: {fast:null, special:null}, HP: null};
+
   return (
     <div className={['board__card', ...addClass].join(' ')}>
       <Button addClass={['board__card__attack']} onClick={attack1Click}>
@@ -22,6 +24,11 @@ const BoardCard = ({ children, addClass, attacks, attack1Click, attack2Click}) =
       </Button>
       <div className="board__card__holder">
         { children }
+        {
+          HP && (
+            <div className="board__card__health">{HP}</div>
+          )
+        }
       </div>
       <Button addClass={['board__card__attack']} onClick={attack2Click}>
         {
@@ -37,6 +44,11 @@ const BoardCard = ({ children, addClass, attacks, attack1Click, attack2Click}) =
           )
         }
       </Button>
+      {
+        name && (
+          <div className="board__card__name">{name}</div>
+        )
+      }
     </div>
   )
 }
@@ -46,17 +58,14 @@ BoardCard.propTypes = {
   addClass: PropTypes.array,
   attack1Click: PropTypes.func,
   attack2Click: PropTypes.func,
-  attacks: PropTypes.object
+  card: PropTypes.object
 }
 
 BoardCard.defaultProps = {
   addClass: [],
   attack1Click: undefined,
   attack2Click: undefined,
-  attacks: {
-    fast: null,
-    special: null
-  }
+  card: null
 };
 
 export default BoardCard;

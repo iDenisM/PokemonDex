@@ -93,7 +93,7 @@ class Engine {
    */
   removePlayerCard(cardId) {
     const index = this._playerCards.findIndex(c => c.id === cardId);
-    if (index != -1) this._playerCards.splice(index, 1);
+    if (index !== -1) this._playerCards.splice(index, 1);
   }
 
   /**
