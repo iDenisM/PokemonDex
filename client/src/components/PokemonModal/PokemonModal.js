@@ -7,8 +7,7 @@ import './PokemonModal.css';
 
 const PokemonLayer = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const selectPokemon = (state) => state.select;
-  const pokemonData = useSelector(selectPokemon);
+  const pokemonData = useSelector((state) => state.select);
   const dispatchClick = useDispatch();
 
   const toggleModal = () => {

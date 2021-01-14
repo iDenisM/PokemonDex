@@ -19,7 +19,7 @@ const PlayerDeck = () => {
       dispatchEvent(playerPickedCard(id))
     }
   }
-  
+
   return (
     <Deck cards={cards} addClass={classList} onCardClick={cardClicked} />
   )

@@ -2,7 +2,7 @@ import './StartButton.css';
 import { useState } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { doStartGame } from '../../actions'
 import Engine from '../../Engine';
 import CloseGameModal from '../CloseGameModal/CloseGameModal';
@@ -10,13 +10,14 @@ import CloseGameModal from '../CloseGameModal/CloseGameModal';
 const Header = () => {
   const [showCloseGameModal, setShowCloseGameModal] = useState(false);
   const [showNoCardsWarning, setShowNoCardsWarning] = useState(false);
+  const gameStarted = useSelector((state) => state.gameStarted);
   const dispatchEvent = useDispatch();
 
   const toggleStartEndGame = () => {
     if (Engine.payerCards.length === 0) {
       return showWarningOnScreen();
     }
-    if (!Engine.gameStarted) {
+    if (!gameStarted) {
       return dispatchEvent(doStartGame());
     } else {
       setShowCloseGameModal(true);
@@ -38,7 +39,7 @@ const Header = () => {
     <>
       <Button addClass={['header__btn']} onClick={toggleStartEndGame} >
         {
-          Engine.gameStarted ? 
+          gameStarted ? 
           (<span className="text">End Game</span>) :
           (<span className="text">Start Game</span>)
         }
