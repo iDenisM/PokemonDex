@@ -19,10 +19,18 @@ class Engine {
     return Engine.instance;
   }
 
+  /**
+   * Returns if game is started state
+   */
   get gameStarted() {
     return this._gameStarted;
   }
 
+  /**
+   * Sets the gameStarted value based
+   * on conditions if one not true
+   * then the game will not be started
+   */
   set gameStarted(start) {
     if (start) {
       
@@ -153,6 +161,7 @@ class Engine {
    */
   getBotCard(playerCard) {
     if (!playerCard) return null;
+    if (this._botCards.length === 1) return this._botCards[0];
     let cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP);
     if (!cardToPlay) {
       cardToPlay = this._botCards.find(c => c.maxCP >= playerCard.maxCP * minThreshold);
@@ -169,6 +178,11 @@ class Engine {
     return true;
   }
 
+  /**
+   * Create a draft deck for the bot so that
+   * it can be used latter for loading the 
+   * bot real card
+   */
   _createDraftBotDeck() {
     let draftBots = [];
 
@@ -178,7 +192,7 @@ class Engine {
       const c = currentCard.maxCP > playerCard.maxCP * minThreshold;
       const d = currentCard.maxCP < playerCard.maxCP * maxThreshold;
 
-      return a && b && (c || d);
+      return a && b && c && d;
     }
     for (const card of this._playerCards) {
       const bot = this._allCards.find(c => findFn(c, card))
