@@ -17,7 +17,6 @@ const Header = () => {
       return showWarningOnScreen();
     }
     if (!Engine.gameStarted) {
-      Engine.startGame();
       return dispatchEvent(doStartGame());
     } else {
       setShowCloseGameModal(true);

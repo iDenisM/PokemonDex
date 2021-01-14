@@ -18,6 +18,13 @@ const Board = () => {
   const playerCard = Engine.getPlayerCardById(playerAction.pickedCardId);
   const botCard = Engine.getBotCard(playerCard);
 
+  if (gameStarted && !Engine.gameStarted) {
+    Engine.startGame();
+  }
+  if (!gameStarted && Engine.gameStarted) {
+    Engine.endGame();
+  }
+
   if (Engine.gameFinished && !showCloseGameModal && Engine.gameStarted) {
     setShowCloseGameModal(true);
   }
