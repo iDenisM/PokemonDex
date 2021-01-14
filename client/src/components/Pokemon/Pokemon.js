@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { selectPokemonClick, addPokemonToList } from '../../actions';
 import { GET_POKEMON } from '../../queries'
+import Engine from '../../Engine';
 
 const Pokemon = (pokemonBase) => {
   const { id, name, image } = pokemonBase.pokemonBase;
@@ -30,7 +31,9 @@ const Pokemon = (pokemonBase) => {
 
   const selectPokemon = () => {
     if (fastAttack && specialAttack) {
-      // SET REDUCER WITH POKEMON DATA
+      const fast = pokemonData.attacks.fast.find(e => e.name === fastAttack);
+      const special = pokemonData.attacks.special.find(e => e.name === specialAttack)
+      Engine.addPlayerCard(pokemonData, { fast, special });
       dispatchEvent(addPokemonToList(pokemonData))
       dispatchEvent(selectPokemonClick(null));
       return true;

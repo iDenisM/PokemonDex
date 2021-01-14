@@ -1,4 +1,4 @@
-import { rewriteURIForGET } from "@apollo/client";
+import Card from './Card';
 
 class Engine {
   _gameStarted = false;
@@ -81,12 +81,56 @@ class Engine {
   }
 
   /**
+   * Create card for player and add to 
+   * players deck
+   * Attcks is object of fast and special
+   * where each has name and damage
+   * @param {object} card 
+   * @param {object} attacks 
+   */
+  addPlayerCard(card, attacks) {
+    if (card && attacks.fast && attacks.special) {
+      const playerCard = new Card(card, attacks);
+      this._playerCards.push(playerCard);
+    }
+  }
+
+  /**
+   * Removes the card from the players deck
+   * @param {number} cardId 
+   */
+  removePlayerCard(cardId) {
+    const index = this._playerCards.findIndex(c => c.id === cardId);
+    if (index != -1) this._playerCards.splice(index, 1);
+  }
+
+  /**
    * Adds to the bots deck a new card
    * @param {object} card 
    */
   addBotCard(card) {
-    this._botCards.push(card);
-    this.__cloneBotCards.push(card);
+    const attacks = this._getBotAttacks(card);
+    const botCard = new Card(card, attacks);
+    this._botCards.push(botCard);
+    this.__cloneBotCards.push(botCard);
+  }
+
+  /**
+   * Returns best attacks from card api
+   * @param {object} card 
+   */
+  _getBotAttacks(card) {
+    const fast = this._getBestAttck(card.attacks.fast);
+    const special = this._getBestAttck(card.attacks.special);
+    return { fast, special };
+  }
+
+  /**
+   * Returns best attack from list
+   * @param {array} attack 
+   */
+  _getBestAttck(attack) {
+
   }
 
   /**

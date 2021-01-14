@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import Card from '../Card';
 import { useDispatch } from 'react-redux';
 import { removePokemonFromList } from '../../actions';
+import Engine from '../../Engine';
 
 const Deck = ({ cards, children, addClass, onCardClick }) => {
   const dispatchRemove = useDispatch();
 
   const removeCard = (id) => {
+    Engine.removePlayerCard(id);
     dispatchRemove(removePokemonFromList({id}));
   }
 

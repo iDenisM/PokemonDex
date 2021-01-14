@@ -12,11 +12,18 @@ import {
   HttpLink,
   ApolloProvider } from '@apollo/client';
 
+const memoryCache = () => {
+  if (window.__APOLLO_STATE__){
+    return new InMemoryCache().restore(JSON.parse(window.__APOLLO_STATE__))
+  }
+  return new InMemoryCache();
+}
+
 const client = new ApolloClient({
   link: new HttpLink({
     uri: 'https://graphql-pokemon2.vercel.app/'
   }),
-  cache: new InMemoryCache()
+  cache: memoryCache()
 });
 
 let store = createStore(rootReducers);
