@@ -5,15 +5,15 @@ import Button from '../Button';
 const BoardCard = ({ children, addClass, attack1Click, attack2Click}) => {
   return (
     <div className={['board__card', ...addClass].join(' ')}>
+      <Button addClass={['board__card__attack']} onClick={attack1Click}>
+        <span className="text">Attack1</span>
+      </Button>
       <div className="board__card__holder">
-        <Button addClass={['board__card__attack']} onClick={attack1Click}>
-          <span className="text">Attack1</span>
-        </Button>
         { children }
-        <Button addClass={['board__card__attack']} onClick={attack2Click}>
-          <span className="text">Attack2</span>
-        </Button>
       </div>
+      <Button addClass={['board__card__attack']} onClick={attack2Click}>
+        <span className="text">Attack2</span>
+      </Button>
     </div>
   )
 }
@@ -28,7 +28,7 @@ BoardCard.propTypes = {
 BoardCard.defaultProps = {
   addClass: [],
   attack1Click: undefined,
-  attack2Click: undefined
+  attack2Click: undefined,
 };
 
 export default BoardCard;
