@@ -80,7 +80,7 @@
     "test": "node scripts/test.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "ssr": "node server/index.js"
+    "ssr:build": "webpack --config config/webpack.server.config.js"
   },
   "eslintConfig": {
     "extends": [
