@@ -1,6 +1,8 @@
 import 'cross-fetch/polyfill';
-import express from 'express';
 import path from 'path';
+import fs from 'fs';
+import express from 'express';
+import cors from 'cors';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import {
@@ -9,22 +11,23 @@ import {
   createHttpLink,
   InMemoryCache
 } from '@apollo/client';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import Layout from '../../client/src/App'
 
-
-import Html from './components/Html';
-// import App from '../../client/src/App';
+import Layout from '../../client/src/App';
 import rootReducers from '../../client/src/reducers';
 
 const app = express();
 const basePort = 3002;
 
-app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
+const corsOptions = {
+  origin: 'http://localhost:3002',
+  credentials: true // <-- REQUIRED backend setting
+};
+app.use(cors(corsOptions));
 
-app.get('*', async (req, res) => {
+app.use('^/$', async (req, res) => {
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
@@ -52,13 +55,23 @@ app.get('*', async (req, res) => {
   getDataFromTree(App).then((content) => {
     const initialState = client.extract();
 
-    const html = <Html content={content} state={initialState} reduxState={reduxState} />;
-  
-    res.status(200);
-    res.send(`<!doctype html>\n${ReactDOMServer.renderToStaticMarkup(html)}`);
-    res.end();
+    const html = fs.readFile(path.resolve(__dirname, '..', '..', 'client', 'build', 'index.html'), 'utf-8', (err, data) => {
+      if (err) {
+        console.log('ERROR');
+      }
+      
+      res.status(200);
+      return res.send(
+        data.replace(
+          '<div id="root"></div>',
+          `<div id="root">${ReactDOMServer.renderToString(content)}</div>`
+        )
+      );
+    })
   });
 });
+
+app.use(express.static(path.resolve(__dirname, '..', '..', 'client', 'build')))
 
 app.listen(basePort, () => console.log(
   `app Server is now running on http://localhost:${basePort}`
