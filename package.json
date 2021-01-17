@@ -1,0 +1,19 @@
+{
+  "name": "pokemondex",
+  "version": "1.0.0",
+  "description": "This is a simple pokemona card game working on ssr with critical css",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/build/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iDenisM/PokemonDex.git"
+  },
+  "author": "Denis Mitiliuc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iDenisM/PokemonDex/issues"
+  },
+  "homepage": "https://github.com/iDenisM/PokemonDex#readme"
+}
