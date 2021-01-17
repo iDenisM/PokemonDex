@@ -1,17 +1,16 @@
 import './App.css';
 import Header from './components/Header';
-import Search from './components/Search';
-import Pokedex from './components/Pokedex';
-import PokemonModal from './components/PokemonModal';
-import Board from './components/Board';
+// import Search from './components/Search';
+// import Pokedex from './components/Pokedex';
+// import PokemonModal from './components/PokemonModal';
+// import Board from './components/Board';
 
 
 const App = () => {
   return (
     <>
-      <div>HELLO</div>
-      {/* <Header/>
-      <main>
+      <Header/>
+      {/* <main>
         <Search />
         <Pokedex />
         <PokemonModal />

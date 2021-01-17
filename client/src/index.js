@@ -19,6 +19,14 @@ const memoryCache = () => {
   return new InMemoryCache();
 }
 
+const preloadedState = () => {
+  if (!window.__PRELOADED_STATE__) return {};
+  const cachedState = window.__PRELOADED_STATE__;
+  delete window.__PRELOADED_STATE__;
+
+  return cachedState
+}
+
 const client = new ApolloClient({
   link: new HttpLink({
     uri: 'https://graphql-pokemon2.vercel.app/'
@@ -26,10 +34,10 @@ const client = new ApolloClient({
   cache: memoryCache()
 });
 
-let store = createStore(rootReducers);
+let store = createStore(rootReducers, preloadedState());
 
-// ReactDOM.hydrate(
-ReactDOM.render(
+// ReactDOM.render(
+ReactDOM.hydrate(
   <ApolloProvider client={client}>
     <Provider store={store}>
       <App />

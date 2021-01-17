@@ -15,7 +15,7 @@ const common = {
         options: {
           presets: [
             '@babel/preset-env',
-            '@babel/preset-react',
+            '@babel/preset-react'
           ],
           plugins: [
             "@babel/plugin-proposal-class-properties"
@@ -51,7 +51,15 @@ const serverConfig = {
     filename: 'server.js',
   },
 
-  devtool: 'cheap-module-source-map'
+  devtool: 'cheap-module-source-map',
+  node: {
+    console: false,
+    global: false,
+    process: false,
+    Buffer: false,
+    __filename: false,
+    __dirname: false,
+  },
 };
 
 module.exports = [serverConfig];
