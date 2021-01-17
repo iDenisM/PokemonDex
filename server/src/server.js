@@ -9,7 +9,8 @@ import {
   createHttpLink,
   InMemoryCache
 } from '@apollo/client';
-// import fetch from 'cross-fetch';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import Layout from '../../client/src/App'
 
