@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Pokemon from '../Pokemon';
 import Modal from '../Modal';
 import { useSelector, useDispatch } from 'react-redux';

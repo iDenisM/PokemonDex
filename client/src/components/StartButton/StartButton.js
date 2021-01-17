@@ -1,39 +1,39 @@
 import './StartButton.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
 import CloseGameModal from '../CloseGameModal/CloseGameModal';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { doStartGame } from '../../actions'
-// import Engine from '../../Engine';
+import { useSelector, useDispatch } from 'react-redux';
+import { doStartGame } from '../../actions'
+import Engine from '../../Engine';
 
 const Header = () => {
   const [showCloseGameModal, setShowCloseGameModal] = useState(false);
   const [showNoCardsWarning, setShowNoCardsWarning] = useState(false);
-  // const gameStarted = useSelector((state) => state.gameStarted);
-  // const dispatchEvent = useDispatch();
+  const gameStarted = useSelector((state) => state.gameStarted);
+  const dispatchEvent = useDispatch();
 
-  // const toggleStartEndGame = () => {
-  //   if (Engine.payerCards.length === 0) {
-  //     return showWarningOnScreen();
-  //   }
-  //   if (!gameStarted) {
-  //     return dispatchEvent(doStartGame());
-  //   } else {
-  //     setShowCloseGameModal(true);
-  //   }
-  // }
+  const toggleStartEndGame = () => {
+    if (Engine.payerCards.length === 0) {
+      return showWarningOnScreen();
+    }
+    if (!gameStarted) {
+      return dispatchEvent(doStartGame());
+    } else {
+      setShowCloseGameModal(true);
+    }
+  }
 
-  // const closeEndGameModal = () => {
-  //   setShowCloseGameModal(false)
-  // }
+  const closeEndGameModal = () => {
+    setShowCloseGameModal(false)
+  }
 
-  // const showWarningOnScreen = () => {
-  //   setShowNoCardsWarning(true);
-  //   setTimeout(() => {
-  //     setShowNoCardsWarning(false);
-  //   }, 1500);
-  // }
+  const showWarningOnScreen = () => {
+    setShowNoCardsWarning(true);
+    setTimeout(() => {
+      setShowNoCardsWarning(false);
+    }, 1500);
+  }
 
   return (
     <>
@@ -47,7 +47,7 @@ const Header = () => {
       <Modal show={showNoCardsWarning} addClass={['modal__warr']}>
         <span className="modal__warr__text">Please select at least one pokemon</span>
       </Modal>
-      {/* <CloseGameModal show={showCloseGameModal} onClose={closeEndGameModal}/> */}
+      <CloseGameModal show={showCloseGameModal} onClose={closeEndGameModal}/>
     </>
   )
 }

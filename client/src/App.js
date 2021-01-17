@@ -1,21 +1,22 @@
 import './App.css';
+import React from 'react';
 import Header from './components/Header';
-// import Search from './components/Search';
-// import Pokedex from './components/Pokedex';
-// import PokemonModal from './components/PokemonModal';
-// import Board from './components/Board';
+import Search from './components/Search';
+import Pokedex from './components/Pokedex';
+import PokemonModal from './components/PokemonModal';
+import Board from './components/Board';
 
 
 const App = () => {
   return (
     <>
       <Header/>
-      {/* <main>
+      <main>
         <Search />
         <Pokedex />
         <PokemonModal />
         <Board />
-      </main> */}
+      </main>
     </>
   );
 }
