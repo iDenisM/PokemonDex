@@ -1,26 +1,12 @@
 import React from 'react';
 
-const Html = ({ children, initialState, scripts }) => (
+const Html = ({ content, state }) => (
   <html>
-    <head>
-      <meta charSet="UTF-8" />
-      <title>Server Side Rendered React App!!</title>
-    </head>
     <body>
-      <div
-        id="app"
-        dangerouslySetInnerHTML={{ __html: children }}
-      />
-
-      {/* {initialState && (
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.APP_STATE=${JSON.stringify(initialState)}`
-          }}
-        />
-      )}
-
-      {scripts.map((item, index) => <script key={index} src={item} />)} */}
+      <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
+      <script dangerouslySetInnerHTML={{
+        __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
+      }} />
     </body>
   </html>
 );

@@ -8,10 +8,10 @@ const common = {
       {
         test: /\.(js|mjs|jsx|ts|tsx)$/,
         loader: 'babel-loader',
-        include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, '..', 'client', 'src')
-        ],
+        // include: [
+        //   path.resolve(__dirname, 'src'),
+        //   path.resolve(__dirname, '..', 'client', 'src')
+        // ],
         options: {
           presets: [
             '@babel/preset-env',
@@ -38,7 +38,7 @@ const serverConfig = {
   ...common,
 
   mode: 'development',
-
+  target: ['web', 'es5'],
   name: 'server',
   target: 'node',
   externals: [nodeExternals()],
