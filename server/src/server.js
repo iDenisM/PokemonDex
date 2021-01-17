@@ -1,6 +1,6 @@
 import 'cross-fetch/polyfill';
 import express from 'express';
-// import path from 'path';
+import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import {
@@ -20,11 +20,9 @@ import Html from './components/Html';
 import rootReducers from '../../client/src/reducers';
 
 const app = express();
-const basePort = 3000;
+const basePort = 3002;
 
-// const appMarkup = ReactDOMServer.renderToString(
-//   <App />
-// );
+app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
 
 app.get('*', async (req, res) => {
   const client = new ApolloClient({
