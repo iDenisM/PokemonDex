@@ -1,29 +1,125 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/components/App.css":
+/*!********************************!*\
+  !*** ./src/components/App.css ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
 
 /***/ "./src/components/App.js":
 /*!*******************************!*\
   !*** ./src/components/App.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.css */ "./src/components/App.css");
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_App_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Test__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Test */ "./src/components/Test.js");
+
 
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, "HELLO"));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "HELLO"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Test__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+/* harmony default export */ __webpack_exports__["default"] = (App);
 
 /***/ }),
 
@@ -31,13 +127,11 @@ var App = function App() {
 /*!********************************!*\
   !*** ./src/components/Html.js ***!
   \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -45,19 +139,40 @@ __webpack_require__.r(__webpack_exports__);
 var Html = function Html(_ref) {
   var content = _ref.content,
       state = _ref.state;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("html", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("body", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("html", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("body", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "root",
     dangerouslySetInnerHTML: {
       __html: content
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("script", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
     dangerouslySetInnerHTML: {
       __html: "window.__APOLLO_STATE__=".concat(JSON.stringify(state).replace(/</g, "\\u003c"), ";")
     }
   })));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Html);
+/* harmony default export */ __webpack_exports__["default"] = (Html);
+
+/***/ }),
+
+/***/ "./src/components/Test.js":
+/*!********************************!*\
+  !*** ./src/components/Test.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Test = function Test() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "TEST");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Test);
 
 /***/ }),
 
@@ -65,7 +180,8 @@ var Html = function Html(_ref) {
 /*!***********************!*\
   !*** ./src/server.js ***!
   \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -110,34 +226,34 @@ app.get('*', /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            client = new _apollo_client__WEBPACK_IMPORTED_MODULE_4__.ApolloClient({
+            client = new _apollo_client__WEBPACK_IMPORTED_MODULE_4__["ApolloClient"]({
               ssrMode: true,
-              link: (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.createHttpLink)({
+              link: Object(_apollo_client__WEBPACK_IMPORTED_MODULE_4__["createHttpLink"])({
                 uri: 'http://localhost:3010',
                 credentials: 'same-origin',
                 headers: {
                   cookie: req.header('Cookie')
                 }
               }),
-              cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_4__.InMemoryCache()
+              cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_4__["InMemoryCache"]()
             });
-            App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_4__.ApolloProvider, {
+            App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_4__["ApolloProvider"], {
               client: client
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_components_App__WEBPACK_IMPORTED_MODULE_6__.default, null)); // const html = ReactDOMServer.renderToStaticMarkup(
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_6__["default"], null)); // const html = ReactDOMServer.renderToStaticMarkup(
             //   <Html children={appMarkup} />
             // );
 
-            (0,_apollo_client_react_ssr__WEBPACK_IMPORTED_MODULE_5__.getDataFromTree)(App).then(function (cc) {
+            Object(_apollo_client_react_ssr__WEBPACK_IMPORTED_MODULE_5__["getDataFromTree"])(App).then(function (cc) {
               // Extract the entirety of the Apollo Client cache's current state
               var initialState = client.extract(); // Add both the page content and the cache state to a top-level component
 
-              var html = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_components_Html__WEBPACK_IMPORTED_MODULE_7__.default, {
+              var html = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_Html__WEBPACK_IMPORTED_MODULE_7__["default"], {
                 content: cc,
                 state: initialState
               }); // Render the component to static markup and return it
 
               res.status(200);
-              res.send("<!doctype html>\n".concat(react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup(html)));
+              res.send("<!doctype html>\n".concat(react_dom_server__WEBPACK_IMPORTED_MODULE_3___default.a.renderToStaticMarkup(html)));
               res.end();
             });
 
@@ -159,12 +275,15 @@ app.listen(basePort, function () {
 
 /***/ }),
 
-/***/ "./src/components/App.css":
-/*!********************************!*\
-  !*** ./src/components/App.css ***!
-  \********************************/
-/***/ (() => {
+/***/ 0:
+/*!*********************************************!*\
+  !*** multi @babel/polyfill ./src/server.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(/*! @babel/polyfill */"@babel/polyfill");
+module.exports = __webpack_require__(/*! F:\Work\_Web\PokemonDex\server\src\server.js */"./src/server.js");
 
 
 /***/ }),
@@ -173,10 +292,10 @@ app.listen(basePort, function () {
 /*!*********************************!*\
   !*** external "@apollo/client" ***!
   \*********************************/
-/***/ ((module) => {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-module.exports = require("@apollo/client");;
+module.exports = require("@apollo/client");
 
 /***/ }),
 
@@ -184,10 +303,10 @@ module.exports = require("@apollo/client");;
 /*!*******************************************!*\
   !*** external "@apollo/client/react/ssr" ***!
   \*******************************************/
-/***/ ((module) => {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-module.exports = require("@apollo/client/react/ssr");;
+module.exports = require("@apollo/client/react/ssr");
 
 /***/ }),
 
@@ -195,10 +314,10 @@ module.exports = require("@apollo/client/react/ssr");;
 /*!**********************************!*\
   !*** external "@babel/polyfill" ***!
   \**********************************/
-/***/ ((module) => {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-module.exports = require("@babel/polyfill");;
+module.exports = require("@babel/polyfill");
 
 /***/ }),
 
@@ -206,10 +325,10 @@ module.exports = require("@babel/polyfill");;
 /*!***************************************!*\
   !*** external "cross-fetch/polyfill" ***!
   \***************************************/
-/***/ ((module) => {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-module.exports = require("cross-fetch/polyfill");;
+module.exports = require("cross-fetch/polyfill");
 
 /***/ }),
 
@@ -217,10 +336,10 @@ module.exports = require("cross-fetch/polyfill");;
 /*!**************************!*\
   !*** external "express" ***!
   \**************************/
-/***/ ((module) => {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-module.exports = require("express");;
+module.exports = require("express");
 
 /***/ }),
 
@@ -228,10 +347,10 @@ module.exports = require("express");;
 /*!************************!*\
   !*** external "react" ***!
   \************************/
-/***/ ((module) => {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-module.exports = require("react");;
+module.exports = require("react");
 
 /***/ }),
 
@@ -239,85 +358,12 @@ module.exports = require("react");;
 /*!***********************************!*\
   !*** external "react-dom/server" ***!
   \***********************************/
-/***/ ((module) => {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-module.exports = require("react-dom/server");;
+module.exports = require("react-dom/server");
 
 /***/ })
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		if(__webpack_module_cache__[moduleId]) {
-/******/ 			return __webpack_module_cache__[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	// startup
-/******/ 	// Load entry module
-/******/ 	__webpack_require__("@babel/polyfill");
-/******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	__webpack_require__("./src/server.js");
-/******/ })()
-;
+/******/ });
 //# sourceMappingURL=server.js.map
