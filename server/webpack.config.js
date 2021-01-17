@@ -5,9 +5,11 @@ const common = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
         loader: 'babel-loader',
-        include: [path.resolve(__dirname, 'src')],
+        include: [
+          path.resolve(__dirname, 'src')
+        ],
         options: {
           presets: [
             '@babel/preset-env',
@@ -29,10 +31,10 @@ const serverConfig = {
   externals: [nodeExternals()],
 
   entry: {
-    server: ['@babel/polyfill', path.resolve(__dirname,'..', 'src', 'server.js')],
+    server: ['@babel/polyfill', path.resolve(__dirname, 'src', 'server.js')],
   },
   output: {
-    path: path.resolve(__dirname, '..', 'build'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'server.js',
   },
 
