@@ -4,15 +4,19 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import Html from './components/Html';
-// import App from './components/App';
+import App from '../../client/src/App';
 
 const app = express();
 
 app.use(express.static(path.join(__dirname)));
 
+const appMarkup = ReactDOMServer.renderToString(
+  <App />
+);
+
 app.get('*', async (req, res) => {
   const html = ReactDOMServer.renderToStaticMarkup(
-    <Html />
+    <Html children={appMarkup} />
   );
 
   res.send(`<!doctype html>${html}`);

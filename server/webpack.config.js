@@ -1,3 +1,4 @@
+require('ignore-styles')
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
@@ -8,14 +9,26 @@ const common = {
         test: /\.(js|mjs|jsx|ts|tsx)$/,
         loader: 'babel-loader',
         include: [
-          path.resolve(__dirname, 'src')
+          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, '..', 'client', 'src')
         ],
         options: {
           presets: [
             '@babel/preset-env',
             '@babel/preset-react',
           ],
+          plugins: [
+            "@babel/plugin-proposal-class-properties"
+          ]
         },
+      },
+      { 
+        test: /\.(scss|css)$/, 
+        loader: "ignore-loader" 
+      },
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        loader: "ignore-loader" 
       },
     ],
   },

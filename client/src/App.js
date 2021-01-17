@@ -9,13 +9,14 @@ import Board from './components/Board';
 const App = () => {
   return (
     <>
-      <Header/>
+      <div>HELLO</div>
+      {/* <Header/>
       <main>
         <Search />
         <Pokedex />
         <PokemonModal />
         <Board />
-      </main>
+      </main> */}
     </>
   );
 }
