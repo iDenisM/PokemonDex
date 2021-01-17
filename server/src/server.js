@@ -59,6 +59,8 @@ app.use('^/$', async (req, res) => {
     const html = fs.readFile(path.resolve(__dirname, '..', '..', 'client', 'build', 'index.html'), 'utf-8', (err, data) => {
       if (err) {
         console.log('ERROR');
+        res.status(500)
+        return res.send('Some error happend');
       }
       
       const html = <Html content={content} state={initialState} reduxState={reduxState} />;
