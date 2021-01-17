@@ -17,6 +17,7 @@ import { getDataFromTree } from "@apollo/client/react/ssr";
 
 import Layout from '../../client/src/App';
 import rootReducers from '../../client/src/reducers';
+import Html from './components/Html'
 
 const app = express();
 const basePort = 3002;
@@ -60,11 +61,14 @@ app.use('^/$', async (req, res) => {
         console.log('ERROR');
       }
       
+      const html = <Html content={content} state={initialState} reduxState={reduxState} />;
+
+      // renderToStaticMarkup
       res.status(200);
       return res.send(
         data.replace(
           '<div id="root"></div>',
-          `<div id="root">${ReactDOMServer.renderToString(content)}</div>`
+          `<div id="root">${ReactDOMServer.renderToStaticMarkup(html)}</div>`
         )
       );
     })

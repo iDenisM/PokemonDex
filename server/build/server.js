@@ -2986,16 +2986,7 @@ var Html = function Html(_ref) {
   var content = _ref.content,
       state = _ref.state,
       reduxState = _ref.reduxState;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("html", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("head", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
-    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap",
-    rel: "stylesheet"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("link", {
-    href: "/static/css/main.50c7a0b8.chunk.css",
-    rel: "stylesheet"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("body", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "root",
     dangerouslySetInnerHTML: {
       __html: content
@@ -3004,7 +2995,7 @@ var Html = function Html(_ref) {
     dangerouslySetInnerHTML: _defineProperty({
       __html: "window.__APOLLO_STATE__=".concat(JSON.stringify(state).replace(/</g, "\\u003c"), ";")
     }, "__html", "window.__PRELOADED_STATE__=".concat(JSON.stringify(reduxState).replace(/</g, "\\u003c"), ";"))
-  })));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Html);
@@ -3043,8 +3034,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_client_react_ssr__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @apollo/client/react/ssr */ "@apollo/client/react/ssr");
 /* harmony import */ var _apollo_client_react_ssr__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_apollo_client_react_ssr__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _client_src_App__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../client/src/App */ "../client/src/App.js");
-/* harmony import */ var _components_Html__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Html */ "./src/components/Html.js");
-/* harmony import */ var _client_src_reducers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../client/src/reducers */ "../client/src/reducers/index.js");
+/* harmony import */ var _client_src_reducers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../client/src/reducers */ "../client/src/reducers/index.js");
+/* harmony import */ var _components_Html__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Html */ "./src/components/Html.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -3064,8 +3055,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var app = express__WEBPACK_IMPORTED_MODULE_3___default()();
-var basePort = 3002; // app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
-
+var basePort = 3002;
 var corsOptions = {
   origin: 'http://localhost:3002',
   credentials: true // <-- REQUIRED backend setting
@@ -3090,7 +3080,7 @@ app.use('^/$', /*#__PURE__*/function () {
               }),
               cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_7__["InMemoryCache"]()
             });
-            store = Object(redux__WEBPACK_IMPORTED_MODULE_8__["createStore"])(_client_src_reducers__WEBPACK_IMPORTED_MODULE_13__["default"]);
+            store = Object(redux__WEBPACK_IMPORTED_MODULE_8__["createStore"])(_client_src_reducers__WEBPACK_IMPORTED_MODULE_12__["default"]);
             App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_7__["ApolloProvider"], {
               client: client
             }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
@@ -3104,9 +3094,15 @@ app.use('^/$', /*#__PURE__*/function () {
                   console.log('ERROR');
                 }
 
+                var html = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Html__WEBPACK_IMPORTED_MODULE_13__["default"], {
+                  content: content,
+                  state: initialState,
+                  reduxState: reduxState
+                }); // renderToStaticMarkup
+
                 res.status(200);
-                return res.send(data.replace('<div id="root"></div>', "<div id=\"root\">".concat(react_dom_server__WEBPACK_IMPORTED_MODULE_6___default.a.renderToString(content), "</div>")));
-              }); // const html = <Html content={content} state={initialState} reduxState={reduxState} />;
+                return res.send(data.replace('<div id="root"></div>', "<div id=\"root\">".concat(react_dom_server__WEBPACK_IMPORTED_MODULE_6___default.a.renderToStaticMarkup(html), "</div>")));
+              });
             });
 
           case 5:
