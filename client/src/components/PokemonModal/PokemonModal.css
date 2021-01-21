@@ -5,6 +5,10 @@
 
 @media (min-width: 1366px) {
   .modal__pokemon .modal__content {
-    width: 45%;
+    width: 30%;
+  }
+
+  .pk__img {
+    padding: 0 40px;
   }
 }

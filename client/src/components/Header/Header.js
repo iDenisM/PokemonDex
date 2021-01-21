@@ -8,7 +8,9 @@ const Header = () => {
 
   return (
     <header className="header">
-      <Image addClass={['header__logo']} src={logo} alt="pokemon logo" width={100} height={50} />
+      <h1>
+        <Image addClass={['header__logo']} src={logo} alt="pokemon logo" width={100} height={50} />
+      </h1>
       <StartButton />
     </header>
   )
