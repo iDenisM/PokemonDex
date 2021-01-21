@@ -4,14 +4,14 @@ import Button from '../Button';
 import './Modal.css';
 
 const Modal = ({ show, children, addClass, onClose, ...porps }) => {
-  // const document = document || {};
+  const document = window.document || {};
   let classList = ['modal'];
   
   if (show) {
-    // document.body.classList.add('scroll-off');
+    document.body.classList.add('scroll-off');
     classList.push('modal--open');
   } else {
-    // document.body.classList.remove('scroll-off');
+    document.body.classList.remove('scroll-off');
   }
 
   return (

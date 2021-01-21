@@ -17,11 +17,11 @@ const Header = () => {
     if (Engine.payerCards.length === 0) {
       return showWarningOnScreen();
     }
-    if (!gameStarted) {
-      return dispatchEvent(doStartGame());
-    } else {
-      setShowCloseGameModal(true);
+    if (gameStarted) {
+      return setShowCloseGameModal(true);
     }
+    
+    dispatchEvent(doStartGame());
   }
 
   const closeEndGameModal = () => {
@@ -39,7 +39,7 @@ const Header = () => {
     <>
       <Button addClass={['header__btn']} onClick={toggleStartEndGame} >
         {
-          showCloseGameModal ? 
+          gameStarted ? 
           (<span className="text">End Game</span>) :
           (<span className="text">Start Game</span>)
         }
